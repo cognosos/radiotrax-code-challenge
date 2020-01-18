@@ -55,7 +55,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx', 'scss', 'css']
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    // constants derived from env
     new webpack.DefinePlugin({
       THEME_PRIMARY_COLOR: JSON.stringify(THEME_PRIMARY_COLOR || '')
     })

@@ -4,10 +4,8 @@ const common = require('./webpack.common.js')
 const PORT = 3000
 
 module.exports = merge(common, {
+  entry: ['./src'],
   mode: 'development',
-  entry: [
-    './src'
-  ],
   output: {
     path: __dirname + '/build',
     publicPath: '/',
@@ -20,5 +18,8 @@ module.exports = merge(common, {
     noInfo: false,
     contentBase: './build',
     port: PORT
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
 })

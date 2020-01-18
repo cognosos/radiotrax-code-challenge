@@ -1,0 +1,14 @@
+{
+  "__COMMENT__": "Device properties.",
+
+  "id": "ID",
+  "device_id": "Device ID",
+  "firmware_version": "Firmware Version",
+  "date_device_available": "Date Available",
+  "manufacturer": "Manufacturer",
+  "application_code": "Application Code",
+  "asset_identifier": "Asset Identifier",
+  "battery_level": "Battery Level",
+  "internal_temperature": "Internal Temperature",
+  "status": "Status"
+}

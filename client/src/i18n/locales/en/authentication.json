@@ -1,0 +1,10 @@
+{
+  "__COMMENT__": "Authentication page text.",
+
+  "username": "Username",
+  "username_hint": "Please enter your username (email).",
+  "password": "Password",
+  "password_hint": "Please enter your password.",
+  "forgot": "Forget your credentials?",
+  "click_here": "Click here."
+}
