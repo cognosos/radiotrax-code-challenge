@@ -1,0 +1,27 @@
+{
+  "extends": "stylelint-config-recommended",
+  "rules": {
+    "indentation": 2,
+    "linebreaks": "unix",
+    "at-rule-no-unknown": null,
+    "max-empty-lines": 1,
+    "color-hex-case": "upper",
+    "rule-empty-line-before": null,
+    "block-no-empty": null,
+    "no-empty-source": null,
+    "comment-whitespace-inside": "always",
+    "block-opening-brace-newline-after": "always",
+    "block-opening-brace-newline-before": "never-single-line",
+    "block-opening-brace-space-before": "always",
+    "block-closing-brace-empty-line-before": "never",
+    "block-closing-brace-newline-before": "always",
+    "block-closing-brace-newline-after": "always",
+    "no-descending-specificity": null,
+    "property-no-unknown": [true, {
+      "ignoreProperties": ["composes"]
+    }],
+    "selector-pseudo-class-no-unknown": [true, {
+      "ignorePseudoClasses": ["global"]
+    }]
+  }
+}
