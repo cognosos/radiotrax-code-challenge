@@ -7,9 +7,15 @@ module.exports = async({config}) => {
   config.module.rules.push(...common.module.rules)
   config.resolve = common.module.resolve
 
-  // storybook source loader
+  /**
+   * storybook source loader, matches the following patterns:
+   * - `${name}.stories.js`
+   * - `${name}.stories.jsx`
+   * - `_stories.js`
+   * - `_stories.jsx`
+   */
   config.module.rules.push({
-    test: /\.stories\.jsx?$/,
+    test: /(_|\.stories)\.jsx?$/,
     loaders: [require.resolve('@storybook/source-loader')],
     enforce: 'pre'
   })
