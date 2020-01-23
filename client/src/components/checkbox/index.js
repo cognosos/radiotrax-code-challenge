@@ -15,7 +15,7 @@ import style from './style.scss'
  * @return {ReactElement}
  */
 function Checkbox(props) {
-  const {className, label, required, disabled, onChange} = props
+  const {className, label, onChange} = props
 
   const classNames = cls([
     className,
@@ -44,10 +44,7 @@ function Checkbox(props) {
           <i className="material-icons">check</i>
         </div>
 
-        <span>
-          {label}
-          {required && <span className={style.required}>*</span>}
-        </span>
+        <span>{label}</span>
       </label>
     </div>
   )
@@ -56,10 +53,6 @@ function Checkbox(props) {
 Checkbox.propTypes = {
   /** CSS class name(s). */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /** Is this element required? */
-  required: PropTypes.bool,
-  /** Is this input element disabled? */
-  disabled: PropTypes.bool,
   /** The label of the input element. */
   label: PropTypes.string,
   /** An input change handler. */
