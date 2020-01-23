@@ -9,11 +9,12 @@ const Login = lazy(() => import('../scenes/login'));
 const Device = lazy(() => import('../scenes/device/'));
 const Devices = lazy(() => import('../scenes/devices'));
 // components
-import withErrorBoundary from '../components/errorBoundary/withErrorBoundary'
 import Splash from '../components/splash'
 import Icon from '../components/icon'
+import withErrorBoundary from '../components/errorBoundary/withErrorBoundary'
 import withSideNav from '../components/sideNav/withSideNav'
 import withTopNav from '../components/topNav/withTopNav'
+import withDestroyCreds from '../services/auth/withDestroyCreds'
 // constants
 import {MESSAGES} from '../constants/app'
 
@@ -67,6 +68,7 @@ export const ROUTES = [
     exact: true,
     path: '/logout',
     component: Login,
+    //wrappers: [withDestroyCreds],
     nav: {
       label: 'Logout',
       icon: <Icon type="exit_to_app" />,

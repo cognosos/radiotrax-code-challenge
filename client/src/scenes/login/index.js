@@ -1,6 +1,5 @@
 /**
- * Main application structure.
- * @module components/App
+ * @module scene/login
  */
 
 // lib
@@ -22,11 +21,14 @@ import Loading from '../../components/loading'
 import Layout from '../../components/layout'
 // util
 import {authEncode} from '../../util/auth'
-
 // style
 import style from './style.scss'
 
-
+/**
+ * A scene that authenticates users.
+ * @param {Object} props Component properties.
+ * @return {ReactElement}
+ */
 function Login(props) {
   const history = useHistory()
   const {auth, setAuth} = useAuthContext()
