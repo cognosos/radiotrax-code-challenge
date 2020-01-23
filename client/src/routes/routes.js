@@ -60,7 +60,7 @@ export const ROUTES = [
   },
   {
     exact: true,
-    path: '/login',
+    path: ['/', '/login'],
     component: Login
   },
   {
