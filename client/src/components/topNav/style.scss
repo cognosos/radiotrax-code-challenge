@@ -1,0 +1,34 @@
+/**
+ * Nav Bar
+ */
+
+@import "~stylesheets/materialize.scss";
+@import "~stylesheets/variables.scss";
+
+.root {}
+
+.navWrapper {
+  composes: nav-wrapper from '~stylesheets/materialize.scss';
+  @extend .blue, .darken-1;
+  margin-left: $side-nav-width;
+  padding-left: 1em;
+}
+
+.title {
+  display: inline-block;
+  margin: 0;
+  font-size: 1.5em;
+  line-height: 1.8;
+}
+
+.items {
+  @extend .blue, .darken-2;
+}
+
+.icon {
+  margin-right: 0.330em;
+}
+
+.right {
+  composes: right from '~stylesheets/materialize.scss';
+}

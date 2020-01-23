@@ -1,0 +1,20 @@
+@import "~stylesheets/variables.scss";
+
+.root {}
+
+.title,
+.subTitle {
+  font-weight: bold;
+}
+
+.title {
+  font-size: 26px;
+  letter-spacing: 0.1rem;
+  color: #FFF;
+}
+
+.subTitle {
+  margin: 0;
+  font-size: 18px;
+  color: rgba(#FFF, 0.8);
+}

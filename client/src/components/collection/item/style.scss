@@ -1,0 +1,41 @@
+/**
+ * Collection Item
+ */
+
+.root {
+  composes: collection-item avatar from '~stylesheets/materialize.scss';
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.root.hasActions {
+  padding-right: 3.5em;
+}
+
+.icon {
+  composes: circle from '~stylesheets/materialize.scss';
+  background-color: #007BFF !important;
+}
+
+.title {
+  composes: title from '~stylesheets/materialize.scss';
+}
+
+.hasOnClick,
+.hasActions {
+  cursor: pointer;
+  transition: background-color 0.33s;
+
+  &:hover {
+    background-color: rgba(#000, 0.01);
+  }
+}
+
+.action {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  composes: secondary-content from '~stylesheets/materialize.scss';
+}

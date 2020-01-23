@@ -1,0 +1,10 @@
+/**
+ * Nav Bar Item
+ */
+
+@import "~stylesheets/materialize.scss";
+@import "~stylesheets/variables.scss";
+
+.root {
+  @extend .blue, .darken-2;
+}

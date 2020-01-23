@@ -1,0 +1,7 @@
+/**
+ * Collection
+ */
+
+.root {
+  composes: collection from '~stylesheets/materialize.scss';
+}

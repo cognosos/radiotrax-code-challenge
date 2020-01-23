@@ -1,0 +1,26 @@
+@import "~stylesheets/variables.scss";
+@import "~stylesheets/materialize.scss";
+
+.root,
+.body {
+  width: 100%;
+}
+
+.full {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+}
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media #{$medium-and-up} {
+  .root {
+    margin: 1em;
+  }
+}

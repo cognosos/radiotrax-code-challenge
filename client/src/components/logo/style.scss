@@ -1,0 +1,28 @@
+/**
+ * App Logo
+ */
+
+.small {
+  width: 20%;
+  height: auto;
+}
+
+.medium {
+  width: 33%;
+  height: auto;
+}
+
+.large {
+  max-width: 100%;
+  height: auto;
+}
+
+.grayscale {
+  filter: saturate(0);
+}
+
+.watermark {
+  padding: 0.5em;
+  filter: saturate(0) brightness(2);
+  opacity: 0.2;
+}

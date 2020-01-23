@@ -1,0 +1,25 @@
+@import "~stylesheets/variables.scss";
+
+.root {
+  width: 100%;
+  margin: 0;
+  padding: 1em 0;
+  text-align: center;
+
+  // 1:1 proportionality trick with height and padding
+  height: 0;
+  padding-bottom: 100%;
+
+  a {
+    color: #FFF;
+  }
+
+  & + .root {
+    border-top: 1px solid rgba(#FFF, 0.25);
+  }
+}
+
+.text {
+  font-size: 75%;
+  text-transform: uppercase;
+}

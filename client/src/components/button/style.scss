@@ -1,0 +1,31 @@
+/**
+ * Buttons
+ */
+
+@import "~stylesheets/materialize.scss";
+
+.button {
+  composes: btn from '~stylesheets/materialize.scss';
+  display: inline-flex;
+  justify-content: center;
+  user-select: none;
+  @extend .blue;
+
+  &:hover {
+    @extend .blue, .lighten-1;
+  }
+
+  &:active {
+    @extend .blue, .darken-1;
+  }
+
+  i {
+    margin: 0 0.5em;
+    font-size: 100% !important;
+    vertical-align: top;
+  }
+}
+
+.icon {
+  margin-left: 0.5em;
+}

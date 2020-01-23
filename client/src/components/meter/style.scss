@@ -1,0 +1,63 @@
+/**
+ * Meter Level Indicator
+ */
+
+@import "~stylesheets/variables.scss";
+
+$meter-size: 1.5em;
+$meter-text-color: #666;
+
+.root {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: $meter-size;
+
+  // defaults, can be overriden at lower scoped elements
+  // passed to the .meterNative
+  --meter-low-color: #{$danger};
+  --meter-medium-color: #{$warning};
+  --meter-high-color: #{$success};
+  --meter-low-threshold: 20%;
+  --meter-medium-threshold: 80%;
+}
+
+.icon,
+.label {
+  line-height: #{$meter-size * 2};
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: $meter-size;
+  margin: 0 0.5em 0 0.75em;
+  border: 0.2em solid rgba($meter-text-color, 0.75);
+  border-radius: $meter-size;
+  overflow: hidden;
+}
+
+.meterNative {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  right: calc(100% - var(--level));
+  appearance: none;
+  border-radius: $meter-size;
+  background: linear-gradient(
+    to right,
+    var(--meter-low-color) var(--meter-low-threshold),
+    var(--meter-medium-color) var(--meter-low-threshold),
+    var(--meter-medium-color) var(--meter-medium-threshold),
+    var(--meter-high-color) 100%
+  );
+  // blow up the gradient so each color step in the gradient takes up the entire bar.
+  // this allows us to have a dynamic, solid background according to the current level.
+  background-size: calc(100vw * 1000) 2em;
+  background-position: calc(var(--level));
+}
+
+.icon {
+  color: $meter-text-color;
+}

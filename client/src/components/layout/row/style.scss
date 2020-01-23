@@ -1,0 +1,20 @@
+@import "~stylesheets/variables.scss";
+
+.row {
+  composes: row from '~stylesheets/materialize.scss';
+  display: flex;
+  flex-direction: row;
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gutterless {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}

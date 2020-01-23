@@ -1,0 +1,29 @@
+/**
+ * Side navigation bar
+ */
+
+@import "~stylesheets/materialize.scss";
+@import "~stylesheets/variables.scss";
+
+.root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: $side-nav-width;
+  background-color: $cognosos;
+  background-color: #3E4F61;
+}
+
+.withSideNav {
+  height: 100vh;
+  margin-left: $side-nav-width;
+  padding: 1em 1.5em;
+}
+
+.watermark {
+  position: absolute;
+  bottom: 1em;
+  width: 100%;
+  text-align: center;
+}

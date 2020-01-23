@@ -1,0 +1,55 @@
+@import "~stylesheets/materialize.scss";
+
+.root {
+  composes: card from '~stylesheets/materialize.scss';
+}
+
+.content {
+  composes: card-content from '~stylesheets/materialize.scss';
+}
+
+.title {
+  composes: card-title from '~stylesheets/materialize.scss';
+  margin-bottom: 1.5em !important;
+  padding-bottom: 0.75em;
+  border-bottom: 1px solid rgba(#000, 0.2);
+}
+
+.subtitle {
+  margin-bottom: 2em;
+  padding-top: 0.5em;
+  font-weight: bold;
+}
+
+.tag {
+  position: absolute;
+  top: 2em;
+  right: 2em;
+  color: rgba(#000, 0.5);
+  font-weight: bold;
+}
+
+.asset {
+  composes: card-image from '~stylesheets/materialize.scss';
+}
+
+.actions {
+  composes: card-action from '~stylesheets/materialize.scss';
+}
+
+@media #{$small-and-down} {
+  .content {
+    padding: 1em !important;
+  }
+
+  .withTag .title {
+    padding-bottom: 2em;
+  }
+
+  .tag {
+    font-size: 75%;
+    left: 1.5em;
+    top: 5em;
+    right: unset;
+  }
+}

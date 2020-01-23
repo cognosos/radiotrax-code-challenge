@@ -1,0 +1,83 @@
+@import '~stylesheets/variables.scss';
+@import '~stylesheets/materialize.scss';
+
+.root {
+  composes: input-field from '~stylesheets/materialize.scss';
+  margin: 1em;
+}
+
+.input ~ label {
+  width: 100%;
+}
+
+.error label {
+  $error-indicator-size: 0.33em;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: calc(50% - #{$error-indicator-size / 2});
+    left: -#{$error-indicator-size * 2};
+    display: block;
+    width: $error-indicator-size;
+    height: $error-indicator-size;
+    border-radius: 50%;
+    @extend .red;
+    opacity: 0.5;
+  }
+}
+
+.withLabel {
+  padding-top: 2em;
+}
+
+.icon,
+.required {
+  transition: color 0.33s !important;
+}
+
+.prefix {
+  composes: prefix from '~stylesheets/materialize.scss';
+}
+
+.withIcon .input {
+  margin-left: 2.5em !important;
+  border-color: red;
+}
+
+// when required is present with a preceding span (label text), bump it right a bit
+.input label :nth-child(2) {
+  margin-left: 2em;
+}
+
+// stop the material label animation for auto-filled values
+.input:-webkit-autofill ~ label {
+  transform: unset !important;
+}
+
+.input:focus {
+  border-bottom: 1px solid $theme-color !important;
+  box-shadow: 0 1px 0 0 $theme-color !important;
+
+  & ~ label {
+    color: $theme-color !important;
+  }
+
+  & ~ label .required {
+    color: rgba(#000, 0.5);
+  }
+
+  & ~ .icon {
+    color: $theme-color;
+  }
+}
+
+.required {
+  float: right;
+  vertical-align: middle;
+  font-variant: small-caps;
+  font-size: 0.7em;
+  letter-spacing: 0.2em;
+  color: rgba(#000, 0);
+}
+

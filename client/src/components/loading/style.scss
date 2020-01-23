@@ -1,0 +1,68 @@
+@import "~stylesheets/materialize.scss";
+@import "~materialize-css/sass/components/variables";;
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.root {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.spinner {
+  width: 8em;
+  height: 8em;
+  border: 0.7em solid rgba(#FFF, 0.5);
+  border-top-color: #FFF;
+  border-radius: 50%;
+  animation: spin infinite 1s ease-in-out;
+}
+
+.message {
+  margin-top: 2em;
+  color: rgba(#000, 0.5);
+  font-size:  1.5em;
+  text-transform: uppercase;
+}
+
+.tiny .spinner {
+  width: 1em;
+  height: 1em;
+  border-width: 0.2em;
+}
+
+.dark {
+  .spinner {
+    @extend .grey-text;
+    border-color: currentColor;
+    border-top-color: transparent;
+    opacity: 0.33;
+  }
+
+  .message {
+    @extend .grey-text;
+  }
+}
+
+.primary {
+  .spinner {
+    @extend .blue-text, .text-lighten-2;
+    border-color: currentColor;
+    border-top-color: transparent;
+  }
+
+  .message {
+    @extend .blue-text, .text-lighten-2;
+  }
+}

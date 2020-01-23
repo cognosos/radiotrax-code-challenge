@@ -1,0 +1,87 @@
+@import "~stylesheets/variables.scss";
+@import "~stylesheets/materialize.scss";
+
+$switch-color: #666;
+$switch-width: 4rem;
+$switch-height: 1rem;
+$switch-knob-size: 1.33rem;
+$switch-border-size: 2rem;
+
+.root input {
+  display: none;
+}
+
+.label,
+.value {
+  user-select: none;
+}
+
+.label {
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  height: $form-element-size;
+  margin: 0.25em 0 0 0;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 4rem;
+  height: 1rem;
+  border-radius: 1rem;
+  background-color: rgba($switch-color, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s;
+    
+  .knob {
+    width: $switch-knob-size;
+    height: $switch-knob-size;
+    top: calc(50% - #{$switch-knob-size / 2});
+    left: 0;
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba($switch-color, 0.5);
+    transition: left 0.25s ease, background-color 0.66s;
+
+    &:hover {
+      @extend .blue, .lighten-1;
+      box-shadow: 0 0 0 0.5rem rgba(0, 0, 0, 0.05);
+    }
+
+    &:active {
+      box-shadow: 0 0 0 0.5rem rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+input:checked + .container .switch {
+  @extend .blue, .lighten-4;
+
+  .knob {
+    left: calc(100% - #{$switch-knob-size});
+    @extend .blue;
+
+    &:hover {
+      @extend .blue, .lighten-1;
+    }
+
+    &:active {
+      @extend .blue, .darken-1;
+    }
+  }
+}
+
+.value {
+  margin-left: 1rem;
+  font-size: 12px;
+  font-weight: normal;
+  cursor: pointer;
+}
