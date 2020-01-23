@@ -84,7 +84,7 @@ function Login(props) {
             name="username"
             type="text"
             label="Username"
-            placeholder="user@example.com"
+            placeholder="myusername"
             required
             pattern="[a-zA-Z0-9]+"
             onChange={handleUsernameChange}
