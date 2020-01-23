@@ -1,5 +1,5 @@
 {
-  "__COMMENT__": "Device properties.",
+  "__COMMENT__": "Device model properties.",
 
   "id": "ID",
   "device_id": "ID del Dispositivo",
@@ -10,5 +10,8 @@
   "asset_identifier": "Identificador de Activo",
   "battery_level": "Nivel de Bateria",
   "internal_temperature": "Temperatura Interna",
-  "status": "Estado"
+  "status": "Estado",
+
+  "__COMMENT__": "Device common text.",
+  "device": "Dispositivo"
 }

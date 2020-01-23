@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const common = require('./webpack.common.js')
-const PORT = 3000
+const PORT = 8080
 
 module.exports = merge(common, {
   entry: ['./src'],
@@ -11,13 +11,14 @@ module.exports = merge(common, {
     publicPath: '/',
     filename: 'build.js'
   },
-  devtool: 'source-map',
+  devtool: 'cheap-eval-source-map',
   devServer: {
+    historyApiFallback: true,
     hot: true,
     quiet: false,
     noInfo: false,
     contentBase: './build',
-    port: PORT
+    port: PORT,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()

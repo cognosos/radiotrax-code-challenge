@@ -1,6 +1,8 @@
+// lib
 const webpack = require('webpack')
 const path = require('path')
-const {THEME_PRIMARY_COLOR} = process.env
+// constants
+const {version} = require('./package.json')
 
 module.exports = {
   entry: ['./src/index.js'],
@@ -26,7 +28,7 @@ module.exports = {
               importLoaders: 2,
               modules: {
                 mode: 'local',
-                localIdentName: '[name]--[local]',
+                localIdentName: '[path]--[local]',
                 context: path.resolve(__dirname, 'src'),
                 hashPrefix: 'demo'
               }
@@ -43,10 +45,10 @@ module.exports = {
           }
         ]
       },
-      // SVG config
+      // Image config
       {
-        test: /\.svg$/,
-        loader: 'svg-sprite-loader'
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader']
       }
     ]
   },
@@ -57,7 +59,7 @@ module.exports = {
   plugins: [
     // constants derived from env
     new webpack.DefinePlugin({
-      THEME_PRIMARY_COLOR: JSON.stringify(THEME_PRIMARY_COLOR || '')
+      VERSION: JSON.stringify(version)
     })
   ]
 }
