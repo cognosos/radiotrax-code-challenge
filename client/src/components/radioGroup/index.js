@@ -50,6 +50,7 @@ function RadioGroup(props) {
               onClick={(e) => handleChange(e, i)}
               checked={isSelected}
               value={value}
+              onChange={() => {}}
             />
 
             <div className={cls(style.input, style.radio, className)} />

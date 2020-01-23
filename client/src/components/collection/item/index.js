@@ -29,7 +29,7 @@ function CollectionItem(props = {}) {
     <li className={classNames} onClick={onClick}>
       <Icon type="signal_cellular_alt" className={style.icon} />
       <span className={style.title}>{title}</span>
-      <p>{description}</p>
+      <div>{description}</div>
       {Array.isArray(actions) && actions.map((action, i) => (
         <div key={i} className={style.action}>{action}</div>
       ))}

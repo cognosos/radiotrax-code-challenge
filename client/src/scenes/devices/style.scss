@@ -1,1 +1,40 @@
+@import "~stylesheets/materialize.scss";
+
 .root {}
+
+.filter {
+  margin: 0;
+}
+
+.sortOptions {
+  display: flex;
+  flex-direction: row;
+}
+
+.sortBy,
+.sortOrder {
+  flex: 1;
+}
+
+.sortLabel {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 1.33em;
+  margin-right: 2em;
+}
+
+.title {
+  padding-top: 1.5em;
+}
+
+.description {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  padding-left: 0;
+}
+
+@media #{$medium-and-up} {
+  .meter {
+    max-width: 20em;
+  }
+}

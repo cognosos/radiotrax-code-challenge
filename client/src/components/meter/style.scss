@@ -28,6 +28,10 @@ $meter-text-color: #666;
   line-height: #{$meter-size * 2};
 }
 
+.label {
+  width: 3em;
+}
+
 .container {
   position: relative;
   width: 100%;

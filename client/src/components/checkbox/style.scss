@@ -8,13 +8,11 @@
 
 .root label {
   display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  user-select: none;
-
   flex-direction: row;
   align-items: center;
   height: auto;
+  cursor: pointer;
+  user-select: none;
 
   label {
     margin: 0;

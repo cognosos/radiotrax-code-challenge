@@ -37,10 +37,9 @@ function Checkbox(props) {
           className={style.input}
           type="checkbox"
           onChange={handleChange}
-          disabled={disabled}
         />
 
-        <div className={cls(style.input, style.checkbox, className)} disabled={disabled}>
+        <div className={cls(style.input, style.checkbox, className)}>
           <i className="material-icons">check</i>
         </div>
 

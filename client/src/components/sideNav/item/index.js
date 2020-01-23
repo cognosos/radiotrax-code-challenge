@@ -23,7 +23,7 @@ function SideNavItem(props){
     <div className={cls(style.root, {[style.active]: active})}>
       <NavLink to={path}>
         <div className={style.icon}>{icon}</div>
-        <p className={style.text}>{label}</p>
+        <div className={style.text}>{label}</div>
       </NavLink>
     </div>
   )
