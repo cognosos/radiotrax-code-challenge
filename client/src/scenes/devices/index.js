@@ -44,7 +44,7 @@ const ORDER_CRITERIA = {
 function DevicesScene(props) {
   const {actions, devices} = props
   const [sortBy, setSortBy] = useState(SORT_CRITERIA.DATE)
-  const [sortOrder, setSortOrder] = useState(ORDER_CRITERIA.DESC)
+  const [sortOrder, setSortOrder] = useState(ORDER_CRITERIA.ASC)
   const [searchTerm, setSearchTerm] = useState()
   const dispatch = useDispatch()
   const history = useHistory()
