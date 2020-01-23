@@ -1,0 +1,13 @@
+/**
+ * Style for animated switch routes.
+ */
+
+.switchWrapper {
+  position: relative;
+  width: 100%;
+
+  > div {
+    position: absolute;
+    width: 100%;
+  }
+}

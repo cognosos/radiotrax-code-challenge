@@ -1,0 +1,12 @@
+/**
+ * Main app style.
+ */
+
+@import "~stylesheets/materialize.scss";
+@import "~stylesheets/variables.scss";
+
+body {
+  background-color: $background;
+  font-family: $font-family;
+  transition: background-color 0.66s;
+}
