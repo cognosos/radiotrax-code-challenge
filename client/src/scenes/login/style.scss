@@ -1,0 +1,66 @@
+@import "~stylesheets/materialize.scss";
+
+.logo {
+  position: fixed;
+  top: 1.5em;
+  left: 0;
+  width: 100%;
+  text-align: center;
+
+  img {
+    max-width: 10em;
+  }
+}
+
+.header,
+.instructions {
+  @extend .blue-text;
+}
+
+.header {
+  margin: 1em 0 0.5em 0;
+  font-size: 2em;
+}
+
+.instructions {
+  margin: 0.5em 0 2em 0;
+  font-size: 1.2em;
+}
+
+.moreDetails {
+  margin-top: 2em;
+  font-size: 0.8em;
+  text-align: center;
+  color: rgba(gray, 0.5);
+}
+
+.button {
+  width: 100%;
+  margin-top: 1.5em;
+}
+
+@media #{$small-and-down} {
+  .root {
+    padding: 1em;
+  }
+
+  .auth {
+    max-width: 38em;
+  }
+
+  .header,
+  .instructions {
+    margin-left: 0.5rem;
+  }
+}
+
+@media #{$medium-and-up} {
+  .auth {
+    max-width: 38em;
+  }
+
+  .header,
+  .instructions {
+    text-align: center;
+  }
+}
