@@ -5,6 +5,8 @@
 // lib
 import React from 'react'
 import PropTypes from 'prop-types'
+// context
+import {useThemeContext} from '../../context/theme'
 // style
 import cls from 'classnames'
 import style from './style.scss'
@@ -19,24 +21,25 @@ import logoC from '../../assets/logo-c.png'
  */
 function Logo(props) {
   const {className, version, type, alt, width, height} = props
+  const {theme} = useThemeContext()
 
   // type can be a single string or an array of strings
-  const typeClassNames = (Array.isArray(type) ? type : [type]).reduce((sum, clsName) => {
+  const typeClassNames = cls((Array.isArray(type) ? type : [type]).reduce((sum, clsName) => {
     if (style[clsName]) sum.push(style[clsName])
       return sum
-  }, [])
+  }, []))
 
-  const imgClassNames = cls(
+  const classNames = cls(
     style.root,
-    style[type],
-    ...typeClassNames
+    style[theme],
+    className
   )
 
   const src = (version === 'c') ? logoC : logoFull
 
   return (
-    <div className={className}>
-      <img className={imgClassNames} src={src} width={width} height={height} alt={alt} />
+    <div className={classNames}>
+      <img className={typeClassNames} src={src} width={width} height={height} alt={alt} />
     </div>
   )
 }

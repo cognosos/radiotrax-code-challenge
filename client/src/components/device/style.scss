@@ -1,4 +1,4 @@
-@import "~stylesheets/materialize.scss";
+@import "~stylesheets/_global.scss";
 
 .root {}
 
@@ -39,5 +39,20 @@ label {
   .meter {
     max-width: 20em;
     margin: 0 0 0 auto;
+  }
+}
+
+/**
+ * Dark Theme
+ */
+.theme-dark {
+
+  label {
+    text-transform: uppercase;
+  }
+
+  .detail {
+    font-family: Roboto Mono;
+    color: $theme-dark-text;
   }
 }

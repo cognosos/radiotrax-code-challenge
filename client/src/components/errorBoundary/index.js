@@ -5,6 +5,8 @@
 // lib
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+// context
+import {useThemeContext} from '../../context/theme'
 // components
 import Splash from '../splash'
 // constants

@@ -1,25 +1,30 @@
-@import "~stylesheets/variables.scss";
+@import "~stylesheets/variables";
 
 .root {
+  display: block;
   width: 100%;
   margin: 0;
-  padding: 1em 0;
+  padding: 2em 0;
   text-align: center;
+  color: rgba(#FFF, 0.66);
+  transition: color 0.3s, background-color 0.3s;
 
-  // 1:1 proportionality trick with height and padding
-  height: 0;
-  padding-bottom: 100%;
-
-  a {
+  &:hover {
     color: #FFF;
+    background-color: rgba(#FFF, 0.05);
   }
 
   & + .root {
     border-top: 1px solid rgba(#FFF, 0.25);
   }
+
+  + .root {
+    border-bottom: 1px solid rgba(#FFF, 0.1);
+  }
 }
 
 .text {
+  margin-top: 0.66em;
   font-size: 75%;
   text-transform: uppercase;
 }

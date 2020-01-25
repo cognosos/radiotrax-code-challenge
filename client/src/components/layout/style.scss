@@ -1,7 +1,7 @@
-@import "~stylesheets/variables.scss";
+@import "~stylesheets/_global.scss";
 
 .root {
-  composes: container from '~stylesheets/materialize.scss';
+  composes: container from '~stylesheets/_global.scss';
 }
 
 .full {

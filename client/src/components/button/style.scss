@@ -2,10 +2,10 @@
  * Buttons
  */
 
-@import "~stylesheets/materialize.scss";
+@import "~stylesheets/_global.scss";
 
-.button {
-  composes: btn from '~stylesheets/materialize.scss';
+.root {
+  composes: btn from '~stylesheets/_global.scss';
   display: inline-flex;
   justify-content: center;
   user-select: none;
@@ -28,4 +28,16 @@
 
 .icon {
   margin-left: 0.5em;
+}
+
+/**
+ * Dark Theme
+ */
+.root.theme-dark {
+  transition: opacity 0.33s;
+
+  &[disabled] {
+    opacity: 0.66;
+    @extend .blue;
+  }
 }

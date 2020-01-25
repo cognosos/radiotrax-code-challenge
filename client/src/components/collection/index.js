@@ -5,6 +5,8 @@
 // lib
 import React from 'react'
 import PropTypes from 'prop-types'
+// context
+import {useThemeContext} from '../../context/theme'
 // components
 import CollectionItem from './item'
 // style
@@ -18,8 +20,10 @@ import style from './style.scss'
  */
 function Collection(props) {
   const {className, items = []} = props
+  const {theme} = useThemeContext()
 
   const classNames = cls(
+    style[theme],
     style.root,
     className,
   )

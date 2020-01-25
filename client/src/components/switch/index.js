@@ -6,6 +6,8 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
+// context
+import {useThemeContext} from '../../context/theme'
 // style
 import style from './style.scss'
 
@@ -16,8 +18,14 @@ import style from './style.scss'
  */
 function Switch(props) {
   const {label, trueText, falseText, onChange} = props
+  const {theme} = useThemeContext()
   const [isChecked, setIsChecked] = useState(props.checked)
   const id = _.uniqueId('switch-')
+
+  const classNames = [
+    style.root,
+    style[theme]
+  ]
 
   /**
    * A handler for toggle selection changing.
@@ -29,7 +37,7 @@ function Switch(props) {
   }
 
   return (
-    <div className={style.root}>
+    <div className={classNames}>
       <label className={style.label}>{label}</label>
       <input
         id={id}

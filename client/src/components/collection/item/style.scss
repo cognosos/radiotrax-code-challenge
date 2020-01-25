@@ -2,8 +2,10 @@
  * Collection Item
  */
 
+@import "~stylesheets/_global.scss";
+
 .root {
-  composes: collection-item avatar from '~stylesheets/materialize.scss';
+  composes: collection-item avatar from '~stylesheets/_global.scss';
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,12 +17,12 @@
 }
 
 .icon {
-  composes: circle from '~stylesheets/materialize.scss';
+  composes: circle from '~stylesheets/_global.scss';
   background-color: #007BFF !important;
 }
 
 .title {
-  composes: title from '~stylesheets/materialize.scss';
+  composes: title from '~stylesheets/_global.scss';
 }
 
 .hasOnClick,
@@ -37,5 +39,21 @@
   position: absolute;
   top: 1em;
   right: 1em;
-  composes: secondary-content from '~stylesheets/materialize.scss';
+  composes: secondary-content from '~stylesheets/_global.scss';
+}
+
+/**
+ * Dark Theme
+ */
+.root.theme-dark {
+  background-color: $theme-dark-gray;
+  border-radius: 5px;
+  border-bottom: 0;
+  @extend .z-depth-3;
+  color: $theme-dark-text;
+
+  .icon,
+  .action {
+    filter: saturate(0.4);
+  }
 }

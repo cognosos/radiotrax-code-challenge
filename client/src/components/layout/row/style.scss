@@ -1,7 +1,7 @@
-@import "~stylesheets/variables.scss";
+@import "~stylesheets/_global.scss";
 
 .row {
-  composes: row from '~stylesheets/materialize.scss';
+  composes: row from '~stylesheets/_global.scss';
   display: flex;
   flex-direction: row;
 }

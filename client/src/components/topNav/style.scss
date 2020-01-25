@@ -2,13 +2,12 @@
  * Nav Bar
  */
 
-@import "~stylesheets/materialize.scss";
-@import "~stylesheets/variables.scss";
+@import "~stylesheets/_global.scss";
 
 .root {}
 
 .navWrapper {
-  composes: nav-wrapper from '~stylesheets/materialize.scss';
+  composes: nav-wrapper from '~stylesheets/_global.scss';
   @extend .blue, .darken-1;
   margin-left: $side-nav-width;
   padding-left: 1em;
@@ -30,5 +29,5 @@
 }
 
 .right {
-  composes: right from '~stylesheets/materialize.scss';
+  composes: right from '~stylesheets/_global.scss';
 }

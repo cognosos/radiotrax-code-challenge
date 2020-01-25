@@ -1,7 +1,7 @@
-@import "~stylesheets/variables.scss";
+@import "~stylesheets/_global.scss";
 
 .column {
-  composes: col from '~stylesheets/materialize.scss';
+  composes: col from '~stylesheets/_global.scss';
 }
 
 .centered {
@@ -25,53 +25,53 @@
 }
 
 .s1, .s2, .s3, .s4, .s5, .s6, .s7, .s8, .s9, .s10, .s11, .s12 {
-  composes: col from '~stylesheets/materialize.scss';
+  composes: col from '~stylesheets/_global.scss';
 }
 
 .s1 {
-  composes: s1 from '~stylesheets/materialize.scss';
+  composes: s1 from '~stylesheets/_global.scss';
 }
 
 .s2 {
-  composes: s2 from '~stylesheets/materialize.scss';
+  composes: s2 from '~stylesheets/_global.scss';
 }
 
 .s3 {
-  composes: s3 from '~stylesheets/materialize.scss';
+  composes: s3 from '~stylesheets/_global.scss';
 }
 
 .s4 {
-  composes: s4 from '~stylesheets/materialize.scss';
+  composes: s4 from '~stylesheets/_global.scss';
 }
 
 .s5 {
-  composes: s5 from '~stylesheets/materialize.scss';
+  composes: s5 from '~stylesheets/_global.scss';
 }
 
 .s6 {
-  composes: s6 from '~stylesheets/materialize.scss';
+  composes: s6 from '~stylesheets/_global.scss';
 }
 
 .s7 {
-  composes: s7 from '~stylesheets/materialize.scss';
+  composes: s7 from '~stylesheets/_global.scss';
 }
 
 .s8 {
-  composes: s8 from '~stylesheets/materialize.scss';
+  composes: s8 from '~stylesheets/_global.scss';
 }
 
 .s9 {
-  composes: s9 from '~stylesheets/materialize.scss';
+  composes: s9 from '~stylesheets/_global.scss';
 }
 
 .s10 {
-  composes: s10 from '~stylesheets/materialize.scss';
+  composes: s10 from '~stylesheets/_global.scss';
 }
 
 .s11 {
-  composes: s11 from '~stylesheets/materialize.scss';
+  composes: s11 from '~stylesheets/_global.scss';
 }
 
 .s12 {
-  composes: s12 from '~stylesheets/materialize.scss';
+  composes: s12 from '~stylesheets/_global.scss';
 }

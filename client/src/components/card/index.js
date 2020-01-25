@@ -5,6 +5,8 @@
 // lib
 import React from 'react'
 import PropTypes from 'prop-types'
+// context
+import {useThemeContext} from '../../context/theme'
 // style
 import cls from 'classnames'
 import style from './style.scss'
@@ -15,9 +17,11 @@ import style from './style.scss'
  * @return {ReactElement}
  */
 function Card(props){
+  const {theme, setTheme} = useThemeContext()
   const {className, title, subtitle, tag, image, actions, children} = props
   const classNames = cls(
     style.root,
+    style[theme],
     className,
     {[style.withTag]: tag}
   )

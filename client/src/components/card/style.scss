@@ -1,15 +1,16 @@
-@import "~stylesheets/materialize.scss";
+@import "~stylesheets/_global.scss";
 
 .root {
-  composes: card from '~stylesheets/materialize.scss';
+  composes: card from '~stylesheets/_global.scss';
+  border-radius: 5px;
 }
 
 .content {
-  composes: card-content from '~stylesheets/materialize.scss';
+  composes: card-content from '~stylesheets/_global.scss';
 }
 
 .title {
-  composes: card-title from '~stylesheets/materialize.scss';
+  composes: card-title from '~stylesheets/_global.scss';
   margin-bottom: 1.5em !important;
   padding-bottom: 0.75em;
   border-bottom: 1px solid rgba(#000, 0.2);
@@ -30,11 +31,11 @@
 }
 
 .asset {
-  composes: card-image from '~stylesheets/materialize.scss';
+  composes: card-image from '~stylesheets/_global.scss';
 }
 
 .actions {
-  composes: card-action from '~stylesheets/materialize.scss';
+  composes: card-action from '~stylesheets/_global.scss';
 }
 
 @media #{$small-and-down} {
@@ -51,5 +52,20 @@
     left: 1.5em;
     top: 5em;
     right: unset;
+  }
+}
+
+/**
+ * Dark Theme
+ */
+.root.theme-dark {
+  background-color: $theme-dark-gray;
+
+  .title {
+    color: $theme-dark-text;
+  }
+
+  .tag {
+    filter: saturate(0.6);
   }
 }

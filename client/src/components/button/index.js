@@ -5,6 +5,8 @@
 // lib
 import React from 'react'
 import PropTypes from 'prop-types'
+// context
+import {useThemeContext} from '../../context/theme'
 // style
 import cls from 'classnames'
 import style from './style.scss'
@@ -24,8 +26,10 @@ function Button(props) {
     iconPosition = 'right'
   } = props
 
-  const classes = cls(
-    style.button,
+  const {theme} = useThemeContext()
+  const classNames = cls(
+    style.root,
+    style[theme],
     className
   )
 
@@ -37,7 +41,7 @@ function Button(props) {
   }
 
   return (
-    <a className={classes} onClick={onClick} disabled={disabled}>
+    <a className={classNames} onClick={onClick} disabled={disabled}>
       {icon && iconPosition === 'left' && iconComp}
       {label && <span>{label}</span>}
       {icon && iconPosition === 'right' && iconComp}

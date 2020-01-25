@@ -11,6 +11,8 @@ import moment from 'moment'
 import {debounce} from 'lodash'
 // redux
 import {getDevices, resetCurrent as resetCurrentDevice} from '../../redux/device'
+// contexts
+import {useThemeContext} from '../../context/theme'
 // components
 import Device from '../../components/device'
 import Loading from '../../components/loading'
@@ -22,8 +24,8 @@ import RadioGroup from '../../components/radioGroup'
 import Meter from '../../components/meter'
 import {Layout, Row, Column} from '../../components/layout'
 // style
-import style from './style.scss'
 import cls from 'classnames'
+import style from './style.scss'
 
 const SORT_CRITERIA = {
   DATE: 'DATE',
@@ -43,6 +45,7 @@ const ORDER_CRITERIA = {
  */
 function DevicesScene(props) {
   const {actions, devices} = props
+  const {theme} = useThemeContext()
   const [sortBy, setSortBy] = useState(SORT_CRITERIA.DATE)
   const [sortOrder, setSortOrder] = useState(ORDER_CRITERIA.ASC)
   const [searchTerm, setSearchTerm] = useState()
@@ -63,7 +66,7 @@ function DevicesScene(props) {
   // display loader while waitingn
   if (!devices) return (
     <Layout full={true} centered={true}>
-      <Loading theme="dark" />
+      <Loading type="dark" />
     </Layout>
   )
 
@@ -182,8 +185,13 @@ function DevicesScene(props) {
     actions: [<Icon type="arrow_right_alt" color="primary" size="medium" />]
   }))
 
+  const classNames = cls(
+    style.root,
+    style[theme]
+  )
+
   return (
-    <div className={style.root}>
+    <div className={classNames}>
 
       <Card>
         <Input

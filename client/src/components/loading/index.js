@@ -15,11 +15,17 @@ import style from './style.scss'
  * @return {ReactElement}
  */
 function Loading(props){
-  const {className, message, children, theme} = props
-  const themes = Array.isArray(theme) ? theme.map((t) => style[t]) : style[theme]
+  const {className, message, children, type} = props
+  const types = Array.isArray(type) ? type.map((t) => style[t]) : style[type]
+
+  const classNames = cls(
+    style.root,
+    className,
+    types
+  )
 
   return (
-    <div className={cls(style.root, className, themes)}>
+    <div className={classNames}>
       <div className={style.spinner} />
       {message && <span className={style.message}>{message || children || 'Loading'}</span>}
     </div>

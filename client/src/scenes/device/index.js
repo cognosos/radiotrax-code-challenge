@@ -10,6 +10,8 @@ import {useTranslation} from 'react-i18next'
 import moment from 'moment'
 // redux
 import {getDevice} from '../../redux/device'
+// contexts
+import {useThemeContext} from '../../context/theme'
 // components
 import Device from '../../components/device'
 import Layout from '../../components/layout'
@@ -24,6 +26,7 @@ import style from './style.scss'
  */
 function DeviceScene(props) {
   const {actions, device} = props
+  const {theme} = useThemeContext()
   const dispatch = useDispatch()
   const {id} = useParams()
   const [t] = useTranslation()
@@ -35,12 +38,17 @@ function DeviceScene(props) {
 
   if (!device) return (
     <Layout full={true} centered={true}>
-      <Loading theme="dark" />
+      <Loading type="dark" />
     </Layout>
   )
 
+  const classNames = (
+    style.root,
+    style[theme]
+  )
+
   return (
-    <div className={style.container}>
+    <div className={classNames}>
       <Device {...device} />
     </div>
   )

@@ -5,6 +5,8 @@
 // lib
 import React from 'react'
 import PropTypes from 'prop-types'
+// context
+import {useThemeContext} from '../../context/theme'
 // style
 import cls from 'classnames'
 import style from './style.scss'
@@ -16,9 +18,11 @@ import style from './style.scss'
  */
 function Badge(props) {
   const {className, children, size, color} = props
+  const {theme} = useThemeContext()
 
   const classNames = cls(
     style.root,
+    style[theme],
     className,
     style[color || 'defaultColor'],
     style[size || 'normal']

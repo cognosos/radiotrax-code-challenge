@@ -1,4 +1,4 @@
-@import "~stylesheets/materialize.scss";
+@import "~stylesheets/global";
 
 .root {}
 
@@ -36,5 +36,20 @@
 @media #{$medium-and-up} {
   .meter {
     max-width: 20em;
+  }
+}
+
+/**
+ * Dark Theme
+ */
+.theme-dark {
+  font-family: Arial;
+
+  label {
+    text-transform: uppercase;
+  }
+
+  .detail {
+    font-family: 'Roboto Mono';
   }
 }

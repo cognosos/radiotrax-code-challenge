@@ -1,4 +1,24 @@
-@import "~stylesheets/materialize.scss";
+@import "~stylesheets/global";
+
+.bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.33;
+}
+
+.fadeIn-appear {
+  transition: opacity 500ms;
+  opacity: 0;
+}
+
+.fadeIn-appear-active {
+  opacity: 1;
+}
 
 .logo {
   position: fixed;
@@ -62,5 +82,24 @@
   .header,
   .instructions {
     text-align: center;
+  }
+}
+
+/**
+ * Dark Theme
+ */
+.theme-dark {
+  .logo {
+    filter: brightness(1);
+  }
+
+  .header,
+  .instructions {
+    color: $theme-dark-text !important;
+    font-family: 'Major Mono Display';
+  }
+
+  .moreDetails {
+    color: gray;
   }
 }

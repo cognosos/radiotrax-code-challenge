@@ -5,6 +5,8 @@
 // lib
 import React from 'react'
 import PropTypes from 'prop-types'
+// context
+import {useThemeContext} from '../../context/theme'
 // style
 import cls from 'classnames'
 import style from './style.scss'
@@ -16,8 +18,10 @@ import style from './style.scss'
  */
 function Checkbox(props) {
   const {className, label, onChange} = props
+  const {theme} = useThemeContext()
 
   const classNames = cls([
+    style[theme],
     className,
     style.root
   ])

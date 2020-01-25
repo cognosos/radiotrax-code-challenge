@@ -5,6 +5,8 @@
 // lib
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
+// context
+import {useThemeContext} from '../../context/theme'
 // style
 import cls from 'classnames'
 import style from './style.scss'
@@ -17,10 +19,12 @@ import style from './style.scss'
 function RadioGroup(props) {
   const {className, items, onChange} = props
   const [selected, setSelected] = useState(0)
+  const {theme} = useThemeContext()
 
   const classNames = cls([
-    className,
-    style.root
+    style.root,
+    style[theme],
+    className
   ])
 
   /**

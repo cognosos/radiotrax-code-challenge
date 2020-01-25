@@ -6,6 +6,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
+// context
+import {useThemeContext} from '../../context/theme'
 // components
 import Title from '../title'
 // style
@@ -19,10 +21,12 @@ import style from './style.scss'
  */
 function Scene(props){
   const {className, children, title, subtitle, full, centered, panes, match} = props
+  const {theme} = useThemeContext()
 
   const classNames = cls(
-    className,
     style.root,
+    style[theme],
+    className,
     {[style.full]: full},
     {[style.centered]: centered}
   )

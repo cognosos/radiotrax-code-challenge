@@ -1,0 +1,26 @@
+/**
+ * Common variables.
+ */
+
+// colors
+$theme-primary-color: #4C8FF4;
+$danger: #FF1D31;
+$warning: #FFD400;
+$success: #00B376;
+$cognosos: #007BFF;
+
+$theme-dark-bg-color: #2F3136;
+$theme-dark-gray: #37393F;
+$theme-dark-gray-2: #313338;
+$theme-dark-black-1: #222428;
+$theme-dark-text: #DCDDDE;
+
+// background and text
+$background: rgba($theme-primary-color, 0.1);
+$font-family: 'Catamaran';
+
+//form units
+$form-element-size: 2.25em;
+
+// component dimensions
+$side-nav-width: 6em;

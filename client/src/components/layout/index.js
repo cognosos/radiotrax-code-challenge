@@ -5,6 +5,8 @@
 // lib
 import React from 'react'
 import PropTypes from 'prop-types'
+// context
+import {useThemeContext} from '../../context/theme'
 // components
 import Row from './row'
 import Column from './column'
@@ -19,10 +21,12 @@ import cls from 'classnames'
  */
 function Layout(props){
   const {className, children, full, centered, gutterless = true} = props
+  const {theme} = useThemeContext()
 
   const classNames = cls(
-    className,
     style.root,
+    style[theme],
+    className,
     {[style.full]: full},
     {[style.centerd]: centered},
     {[style.gutterless]: gutterless}

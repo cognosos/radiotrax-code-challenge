@@ -3,55 +3,51 @@
  */
 
 // lib
-import React, {Suspense} from 'react'
-// routes
-import Routes from '../routes'
-// redux
-import appActions '../redux/app'
-// components
-import Loading from '../components/loading'
+import React, {useEffect} from 'react'
+import {ToastProvider} from 'react-toast-notifications'
+// contexts
+import {AuthContext} from '../context/auth'
+import {ThemeContext} from '../context/theme'
+// hooks
+import useAuth from '../hooks/useAuth'
+import useTheme from '../hooks/useTheme'
 // style
+import cls from 'classnames'
 import style from './style.scss'
-import '../stylesheets/app.scss'
 
 /**
  * The main application scene.
+ * Renders all subsequent route-provided scenes as children.
  * @param {Object} props Component properties.
  * @return {ReactElement}
  */
 function AppScene(props) {
+  const {children} = props
+  const [auth, setAuth] = useAuth()
+  const [theme, setTheme] = useTheme()
+
+  useEffect(() => {
+    const themeName = 'dark'
+    document.body.classList.add(style[`theme-${themeName}`])
+    setTheme(themeName)
+  }, [])
+
+  const classNames = cls(
+    style.appContainer,
+    style[theme]
+  )
+
   return (
-    <div className={style.appContainer}>
-      <Suspense fallback={<Loading />}>
-        <Routes {...props} isLoggedIn={false} />
-      </Suspense>
+    <div className={classNames}>
+      <AuthContext.Provider value={{auth, setAuth}}>
+        <ThemeContext.Provider value={{theme, setTheme}}>
+            <ToastProvider placement="top-center" autoDismiss autoDismissTimeout={2000}>
+              {children}
+            </ToastProvider>
+        </ThemeContext.Provider>
+      </AuthContext.Provider>
     </div>
   )
 }
 
-/**
- * Map state to props.
- * @param {Object} state Component state.
- * @return {Object} mapped state.
- */
-function mapStateToProps(state){
-  const {isAuthenticated, errors} = state
-  return {
-    isAuthenticated,
-    errors
-  }
-}
-
-/**
- * Map dispatch to props.
- * @param {Object} dispatch Component state.
- * @return {Object} mapped properties.
- */
-function mapDispatchToProps(dispatch){
-  return {}
-}
-
-let Wrapped = AppScene
-Wrapped = connect(mapStateToProps, mapDispatchToProps)(Wrapped)
-
-export default Wrapped
+export default AppScene

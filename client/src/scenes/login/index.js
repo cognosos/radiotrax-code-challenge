@@ -3,12 +3,14 @@
  */
 
 // lib
+import {CSSTransition} from "react-transition-group";
 import React, {useState, useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
 import {useToasts} from 'react-toast-notifications'
 import _ from 'lodash'
 // contexts
 import {useAuthContext} from '../../context/auth'
+import {useThemeContext} from '../../context/theme'
 // services
 import AuthService from '../../services/auth'
 // components
@@ -19,6 +21,9 @@ import Input from '../../components/input'
 import Button from '../../components/button'
 import Loading from '../../components/loading'
 import Layout from '../../components/layout'
+import Particles from 'react-particles-js'
+// constants
+import PARTICLES_CONFIG from './bg.config.json'
 // util
 import {authEncode} from '../../util/auth'
 // style
@@ -32,6 +37,7 @@ import style from './style.scss'
 function Login(props) {
   const history = useHistory()
   const {auth, setAuth} = useAuthContext()
+  const {theme} = useThemeContext()
   const {addToast} = useToasts()
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
@@ -65,54 +71,68 @@ function Login(props) {
     setValidation({...valid, password: isValid})
   }
 
+  const classNames = (
+    style.root,
+    style[theme]
+  )
+
+  const [enter, setEnter] = useState()
+  useEffect(() => {
+    setTimeout(() => setEnter(true), 300)
+  })
+
   return (
-    <Scene full={true} centered={true} className={style.root}>
-      <Layout className={style.auth}>
+    <Scene full={true} centered={true} className={classNames}>
+      <div className={style.bg}>
+        <Particles params={PARTICLES_CONFIG} width="100%" height="100vh"  />
+      </div>
 
-        <Logo className={style.logo} type={['medium', 'grayscale']} />
+      <CSSTransition in={true} appear={true} timeout={500} classNames={style.fadeIn}>
+        <Layout className={style.auth}>
+          <Logo className={style.logo} type={['medium', 'grayscale']} />
 
-        <h1 className={style.header}>
-          Welcome!
-        </h1>
+          <Card>
+            <h1 className={style.header}>
+              Welcome!
+            </h1>
 
-        <h2 className={style.instructions}>
-          Please log in to your account.
-        </h2>
+            <h2 className={style.instructions}>
+              Please log in to your Account.
+            </h2>
 
-        <Card>
-          <Input
-            name="username"
-            type="text"
-            label="Username"
-            placeholder="myusername"
-            required
-            pattern="[a-zA-Z0-9]+"
-            onChange={handleUsernameChange}
-          />
+            <Input
+              name="username"
+              type="text"
+              label="Username"
+              placeholder="myusername"
+              required
+              pattern="[a-zA-Z0-9]+"
+              onChange={handleUsernameChange}
+            />
 
-          <Input
-            name="password"
-            type="password"
-            label="Password"
-            placeholder="........"
-            required
-            onChange={handlePasswordChange}
-          />
+            <Input
+              name="password"
+              type="password"
+              label="Password"
+              placeholder="........"
+              required
+              onChange={handlePasswordChange}
+            />
 
-          <Button
-            className={style.button}
-            onClick={handleSubmit}
-            disabled={!canSubmit}
-            label={processing ? null : 'Login'}
-            icon={processing ? <Loading theme='tiny' /> : null}
-          />
-        </Card>
+            <Button
+              className={style.button}
+              onClick={handleSubmit}
+              disabled={!canSubmit}
+              label={processing ? null : 'Login'}
+              icon={processing ? <Loading type='tiny' /> : null}
+            />
+          </Card>
 
-        <p className={style.moreDetails}>
-          Remember that usernames do not contain any special characters.
-        </p>
-
-      </Layout>
+          <p className={style.moreDetails}>
+            Remember that usernames can not contain any special characters.
+          </p>
+        </Layout>
+      </CSSTransition>
     </Scene>
   )
 }

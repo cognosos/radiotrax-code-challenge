@@ -5,11 +5,14 @@
 // lib
 import React from 'react'
 import PropTypes from 'prop-types'
+// context
+import {useThemeContext} from '../../context/theme'
 // components
 import SideNavItem from './item'
 import Icon from '../icon'
 import Logo from '../logo'
 // style
+import cls from 'classnames'
 import style from './style.scss'
 
 /**
@@ -18,7 +21,8 @@ import style from './style.scss'
  * @return {ReactElement}
  */
 function SideNav(props){
-  const {history, hide} = props
+  const {className} = props
+  const {theme} = useThemeContext()
   let {routes = []} = props
 
   routes = routes.reduce((sum, path) => {
@@ -26,8 +30,14 @@ function SideNav(props){
     return sum
   }, {})
 
+  const classNames = cls(
+    style.root,
+    style[theme],
+    className
+  )
+
   return (
-    <div className={style.root}>
+    <div className={classNames}>
       {Object.keys(routes).map((key, i) => {
         const route = routes[key]
         const {label, icon} = route.nav
@@ -41,12 +51,10 @@ function SideNav(props){
 }
 
 SideNav.propTypes = {
-  /** The browser history object. */
-  history: PropTypes.object,
+  /** CSS class name(s). */
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /** Navigation routes. */
-  routes: PropTypes.array,
-  /** A function to manage hiding side nav items. */
-  hide: PropTypes.func
+  routes: PropTypes.array
 }
 
 export default SideNav

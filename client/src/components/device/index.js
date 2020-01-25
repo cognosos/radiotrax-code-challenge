@@ -11,13 +11,15 @@
 import React, {useEffect} from 'react'
 import {useTranslation} from 'react-i18next'
 import moment from 'moment'
-// constants
-import {STATUS_CODES, STATUS_TEXT} from '../../constants/device'
+// context
+import {useThemeContext} from '../../context/theme'
 // components
 import Card from '../card'
 import Badge from '../badge'
 import Meter from '../meter'
 import {Layout, Row, Column} from '../layout'
+// constants
+import {STATUS_CODES, STATUS_TEXT} from '../../constants/device'
 // style
 import cls from 'classnames'
 import style from './style.scss'
@@ -29,6 +31,7 @@ import style from './style.scss'
  */
 function Device(props) {
   const {t, i18n} = useTranslation()
+  const {theme} = useThemeContext()
   const {
     id,
     device_id,
@@ -57,8 +60,13 @@ function Device(props) {
     </Badge>
   )
 
+  const classNames = cls(
+    style.root,
+    style[theme]
+  )
+
   return (
-    <Card title={asset_identifier} tag={statusComp} className={style.root}>
+    <Card title={asset_identifier} tag={statusComp} className={classNames}>
 
       <Layout className={style.details}>
 

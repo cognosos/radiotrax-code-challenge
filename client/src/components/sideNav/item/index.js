@@ -17,15 +17,16 @@ import style from './style.scss'
  */
 function SideNavItem(props){
   const {path, label, icon, children} = props
-  const active = true
+
+  const classNames = cls(
+    style.root
+  )
 
   return (
-    <div className={cls(style.root, {[style.active]: active})}>
-      <NavLink to={path}>
-        <div className={style.icon}>{icon}</div>
-        <div className={style.text}>{label}</div>
-      </NavLink>
-    </div>
+    <NavLink to={path} className={classNames}>
+      <div className={style.icon}>{icon}</div>
+      <div className={style.text}>{label}</div>
+    </NavLink>
   )
 }
 

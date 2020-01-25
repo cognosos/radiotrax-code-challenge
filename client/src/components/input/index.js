@@ -6,6 +6,10 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
+// context
+import {useThemeContext} from '../../context/theme'
+// components
+import Icon from '../icon'
 // style
 import cls from 'classnames'
 import style from './style.scss'
@@ -37,6 +41,7 @@ function Input(props) {
 
   if (!type) throw new Error('Input Error: Component requires an explicit `type`.')
 
+  const {theme} = useThemeContext()
   const [validation, setValidation] = useState(fieldState)
 
   // trust explicitly passed names, but prevent form field name collisions otherwise
@@ -61,13 +66,14 @@ function Input(props) {
     })
   }
 
-  const classNames = cls([
+  const classNames = cls(
     style.root,
+    style[theme],
     className,
     {[style.withLabel]: label || required},
     {[style.withIcon]: icon},
     {[style.error]: validation.error}
-  ])
+  )
 
   const labelText = label ? <span>{label}</span> : ''
   const requiredText = (required && requiredLabel) ? <span className={style.required}>required</span> : ''
@@ -87,7 +93,7 @@ function Input(props) {
         maxLength={maxLength}
         tooltip={label}
       />
-      {icon && <i className={cls('material-icons', style.icon, style.prefix)}>{icon}</i>}
+      {icon && <Icon type={icon} className={cls(style.icon, style.prefix)} />}
       {(label || required) && <label htmlFor={uniqueName}>{labelText}{requiredText}</label>}
     </div>
   )

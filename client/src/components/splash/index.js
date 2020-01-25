@@ -14,6 +14,7 @@ import style from './style.scss'
  */
 function Splash(props){
   const {message} = props
+
   return (
     <div className={style.root}>
       <h3>{message}</h3>

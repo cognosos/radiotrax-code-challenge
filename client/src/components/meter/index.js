@@ -5,6 +5,8 @@
 // lib
 import React from 'react'
 import PropTypes from 'prop-types'
+// context
+import {useThemeContext} from '../../context/theme'
 // components
 import Icon from '../icon'
 // style
@@ -30,8 +32,10 @@ function Meter(props) {
     mediumThreshold
   } = props
 
-  const classes = cls(
+  const {theme} = useThemeContext()
+  const classNames = cls(
     style.root,
+    style[theme],
     className
   )
 
@@ -46,7 +50,7 @@ function Meter(props) {
   }
 
   return (
-    <div className={classes}>
+    <div className={classNames}>
       <span className={style.label}>{label || `${percentage}%`}</span>
       <div className={style.container}>
         <meter

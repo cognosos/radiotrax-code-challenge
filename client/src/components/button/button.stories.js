@@ -23,7 +23,7 @@ storiesOf('Button', module)
   ))
 
   .add('Subcomponent', () => (
-    <Button label="Loading" icon={<Loading message={false} theme='tiny' />} />
+    <Button label="Loading" icon={<Loading message={false} type='tiny' />} />
   ))
 
   .add('Click Handler', () => (

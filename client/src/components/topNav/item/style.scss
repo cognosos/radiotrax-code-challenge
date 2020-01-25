@@ -2,8 +2,7 @@
  * Nav Bar Item
  */
 
-@import "~stylesheets/materialize.scss";
-@import "~stylesheets/variables.scss";
+@import "~stylesheets/_global.scss";
 
 .root {
   @extend .blue, .darken-2;

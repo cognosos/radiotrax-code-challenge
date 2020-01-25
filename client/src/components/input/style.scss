@@ -1,9 +1,8 @@
-@import '~stylesheets/variables.scss';
-@import '~stylesheets/materialize.scss';
+@import '~stylesheets/_global.scss';
 
 .root {
-  composes: input-field from '~stylesheets/materialize.scss';
-  margin: 1em;
+  composes: input-field from '~stylesheets/_global.scss';
+  margin: 0;
 }
 
 .input ~ label {
@@ -37,7 +36,7 @@
 }
 
 .prefix {
-  composes: prefix from '~stylesheets/materialize.scss';
+  composes: prefix from '~stylesheets/_global.scss';
 }
 
 .withIcon .input {
@@ -56,11 +55,11 @@
 }
 
 .input:focus {
-  border-bottom: 1px solid $theme-color !important;
-  box-shadow: 0 1px 0 0 $theme-color !important;
+  border-bottom: 1px solid $theme-primary-color !important;
+  box-shadow: 0 1px 0 0 $theme-primary-color !important;
 
   & ~ label {
-    color: $theme-color !important;
+    color: $theme-primary-color !important;
   }
 
   & ~ label .required {
@@ -68,7 +67,7 @@
   }
 
   & ~ .icon {
-    color: $theme-color;
+    color: $theme-primary-color;
   }
 }
 
@@ -81,3 +80,51 @@
   color: rgba(#000, 0);
 }
 
+/**
+ * Dark theme
+ */
+.root.theme-dark {
+  .input {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0.66em 0;
+    padding: 0.5em 0.8em;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid $theme-dark-black-1;
+    background-color: $theme-dark-gray-2;
+    color: $theme-dark-text;
+  }
+
+  // a very annoying hack to prevent chrome and safari from
+  // overriding -webkit-autofill properties
+  @-webkit-keyframes autofill {
+    0%, 100% {
+      color: $theme-dark-text;
+      background-color: $theme-dark-gray-2;
+    }
+  }
+  input:-webkit-autofill {
+    -webkit-animation-delay: 1s;
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+  }
+
+  .input::placeholder {
+    opacity: 0.33;
+  }
+
+  .input:-webkit-autofill ~ label {
+    transform: translateY(1em) scale(1) !important;
+  }
+
+  .input:focus {
+    border: 1px solid $theme-primary-color;
+    box-shadow: unset !important;
+  }
+
+  label {
+    font-size: 0.8em;
+    text-transform: uppercase;
+  }
+}

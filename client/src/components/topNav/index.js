@@ -5,6 +5,8 @@
 // lib
 import React from 'react'
 import PropTypes from 'prop-types'
+// context
+import {useThemeContext} from '../../context/theme'
 // components
 import TopNavItem from './item'
 import Icon from '../icon'
@@ -19,14 +21,21 @@ import style from './style.scss'
  */
 function TopNav(props) {
   const {className, children, title} = props
+  const {theme} = useThemeContext()
 
   let {items = []} = props
   if (children) items = children.map((child) => child.props)
 
   if (!items) throw new Error('TopNav requires TopNav.items or TopNav.children[TopNavItem, TopNavItem, ...]')
 
+  const classNames = cls(
+    style.root,
+    style[theme],
+    className
+  )
+
   return (
-    <nav className={cls(style.root, className)}>
+    <nav className={classNames}>
       <div className={style.navWrapper}>
         {title && <h1 className={style.title}>{title}</h1>}
 

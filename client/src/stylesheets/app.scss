@@ -2,11 +2,15 @@
  * Main app style.
  */
 
-@import "~stylesheets/materialize.scss";
-@import "~stylesheets/variables.scss";
+@import "./_global.scss";
+
+* {
+  box-sizing: border-box;
+}
 
 body {
-  background-color: $background;
-  font-family: $font-family;
-  transition: background-color 0.66s;
+  width: 100vw;
+  height: 100vh;
+  font-family: $font-family, sans-serif;
+  background: $background;
 }
