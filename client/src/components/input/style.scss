@@ -2,7 +2,7 @@
 
 .root {
   composes: input-field from '~stylesheets/_global.scss';
-  margin: 0;
+  margin: 0 !important;
 }
 
 .input ~ label {

@@ -6,8 +6,6 @@
 import React from 'react'
 // components
 import TopNav from './'
-// style
-import style from './style.scss'
 
 /**
  * Wrap Component with SideNav HOC.

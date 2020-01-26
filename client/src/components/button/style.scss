@@ -27,6 +27,7 @@
 }
 
 .icon {
+  margin-top: 0.66em;
   margin-left: 0.5em;
 }
 
@@ -38,6 +39,7 @@
 
   &[disabled] {
     opacity: 0.66;
+    color: #FFF !important;
     @extend .blue;
   }
 }

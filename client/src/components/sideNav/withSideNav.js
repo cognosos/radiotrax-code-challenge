@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 // components
 import SideNav from './'
 // constants
-import ROUTES from '../../routes/routes'
+import {ROUTES} from '../../routes'
 // style
 import style from './style.scss'
 

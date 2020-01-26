@@ -17,6 +17,7 @@ import {useThemeContext} from '../../context/theme'
 import Device from '../../components/device'
 import Loading from '../../components/loading'
 import Collection from '../../components/collection'
+import Pagination from '../../components/pagination'
 import Card from '../../components/card'
 import Icon from '../../components/icon'
 import Input from '../../components/input'
@@ -113,85 +114,13 @@ function DevicesScene(props) {
     return a - b
   }
 
-  const collectionItems = filteredDevices.sort(sortFunc).map((data, i) => ({
-    title: <p className={style.title}>Device: {data.asset_identifier}</p>,
-    description: (
-      <Layout className={style.description} gutterless>
-        {/** device id */}
-        {data.device_id &&
-          <Row className={style.row}>
-            <Column vcenter={true} className={style.column}>
-              <label>{t('device_id')}</label>
-            </Column>
-            <Column className={style.detail}>
-              {data.device_id}
-            </Column>
-          </Row>
-        }
-        {/** firmware version */}
-        {data.firmware_version &&
-          <Row className={style.row}>
-            <Column vcenter={true} className={style.column}>
-              <label>{t('firmware_version')}</label>
-            </Column>
-            <Column className={style.detail}>
-              {data.firmware_version}
-            </Column>
-          </Row>
-        }
-        {/** date available */}
-        {data.date_device_available &&
-          <Row className={style.row}>
-            <Column vcenter={true} className={style.column}>
-              <label>{t('date_device_available')}</label>
-            </Column>
-            <Column className={cls(style.detail, style.date)}>
-              {moment(data.date_device_available).locale(currentLang).format('MMMM Do YYYY, h:mm A')}
-            </Column>
-          </Row>
-        }
-        {/** battery levels */}
-        {data.battery_level !== undefined &&
-          <Row className={style.row}>
-            <Column vcenter={true} className={style.column}>
-              <label>{t('battery_level')}</label>
-            </Column>
-            <Column className={style.detail}>
-              <Meter level={data.battery_level / 100} icon="battery_charging_full" className={style.meter} />
-            </Column>
-          </Row>
-        }
-        {/** temperature */}
-        {data.internal_temperature !== undefined &&
-          <Row className={style.row}>
-            <Column vcenter={true} className={style.column}>
-              <label>{t('internal_temperature')}</label>
-            </Column>
-            <Column className={style.detail}>
-              <Meter
-                level={data.internal_temperature / 100}
-                icon="wb_sunny"
-                label={`${data.internal_temperature}°`}
-                lowColor="#5A9FCE" mediumColor="purple" highColor="red"
-                lowThreshold="40%" mediumThreshold="60%"
-                className={style.meter}
-              />
-            </Column>
-          </Row>
-        }
-      </Layout>
-    ),
-    onClick: () => history.push(`/devices/${data.id}`),
-    actions: [<Icon type="arrow_right_alt" color="primary" size="medium" />]
-  }))
-
   const classNames = cls(
     style.root,
     style[theme]
   )
 
   return (
-    <div className={classNames}>
+    <div className={'fuck'}>
 
       <Card>
         <Input
@@ -234,7 +163,15 @@ function DevicesScene(props) {
         </div>
       </Card>
 
-      <Collection items={collectionItems} />
+      <Pagination className={style.pagination} pages={5} />
+
+      {filteredDevices.sort(sortFunc).map((data, i) => (
+        <div key={i} onClick={() => history.push(`/devices/${data.id}`)}>
+          <Device {...data} />
+        </div>
+      ))}
+
+      <Pagination pages={5} />
     </div>
   )
 }

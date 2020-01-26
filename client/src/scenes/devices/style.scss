@@ -23,6 +23,14 @@
   margin-right: 2em;
 }
 
+.pagination {
+  margin: 3em 0 1em 0;
+}
+
+.collection li + li {
+  margin-top: 1em !important;
+}
+
 .title {
   padding-top: 1.5em;
 }

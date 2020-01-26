@@ -46,11 +46,11 @@
  * Dark Theme
  */
 .root.theme-dark {
-  background-color: $theme-dark-gray;
   border-radius: 5px;
-  border-bottom: 0;
+  border-bottom: 0 !important;
   @extend .z-depth-3;
   color: $theme-dark-text;
+  background-color: $theme-dark-gray !important;
 
   .icon,
   .action {

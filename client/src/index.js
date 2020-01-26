@@ -3,7 +3,7 @@
  */
 
 // lib
-import React, {Suspense} from 'react'
+import React from 'react'
 import {render} from 'react-dom'
 import {Provider} from 'react-redux'
 import {Router} from 'react-router-dom'
@@ -32,11 +32,9 @@ const Root = (
   <ErrorBoundary>
     <Provider store={store}>
       <Router history={history}>
-        <Suspense fallback={fallback}>
-          <AppScene>
-            <Routes />
-          </AppScene>
-        </Suspense>
+        <AppScene>
+          <Routes />
+        </AppScene>
       </Router>
     </Provider>
   </ErrorBoundary>

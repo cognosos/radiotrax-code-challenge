@@ -4,6 +4,7 @@
 
 // lib
 import React, {useEffect} from 'react'
+import {useLocation} from 'react-router-dom'
 import {ToastProvider} from 'react-toast-notifications'
 // contexts
 import {AuthContext} from '../context/auth'
@@ -25,12 +26,17 @@ function AppScene(props) {
   const {children} = props
   const [auth, setAuth] = useAuth()
   const [theme, setTheme] = useTheme()
+  const location = useLocation()
 
+  // keep the page up to date with the current theme
   useEffect(() => {
     const themeName = 'dark'
     document.body.classList.add(style[`theme-${themeName}`])
     setTheme(themeName)
   }, [])
+
+  // scroll to the top of the page on every location change
+  useEffect(() => window.scrollTo(0, 0), [location])
 
   const classNames = cls(
     style.appContainer,
@@ -41,9 +47,9 @@ function AppScene(props) {
     <div className={classNames}>
       <AuthContext.Provider value={{auth, setAuth}}>
         <ThemeContext.Provider value={{theme, setTheme}}>
-            <ToastProvider placement="top-center" autoDismiss autoDismissTimeout={2000}>
-              {children}
-            </ToastProvider>
+          <ToastProvider placement="top-center" autoDismiss autoDismissTimeout={2000}>
+            {children}
+          </ToastProvider>
         </ThemeContext.Provider>
       </AuthContext.Provider>
     </div>

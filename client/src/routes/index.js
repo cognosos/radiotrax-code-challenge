@@ -6,16 +6,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Route, Redirect, Switch} from 'react-router-dom'
-import {AnimatedSwitch} from 'react-router-transition'
+// routes
+import Login from './login'
+import Logout from './logout'
+import Device from './device'
+import Devices from './devices'
+import NotFound from './notFound'
 // contexts
 import {useAuthContext} from '../context/auth'
 // components
-import Splash from '../components/splash'
-// constants
-import {ROUTES} from './routes'
-import {MESSAGES} from '../constants/app'
-// style
-import style from '../stylesheets/routes.scss'
+import FadeIn from '../components/transitions/fadeIn'
+
+/**
+ * All application routies, in order of priority and side-nav rendering.
+ */
+export const ROUTES = [
+  Devices,
+  Device,
+  Login,
+  Logout,
+  NotFound
+]
 
 /**
  * A route that requires user authentication to render child components.
@@ -23,32 +34,25 @@ import style from '../stylesheets/routes.scss'
  * @return {ReactElement}
  */
 function PrivateRoute(props){
-  const {component: Component, location, ...routeProps} = props
+  const {component: Component, wrappers, hooks, ...routeProps} = props
   const {auth, setAuth} = useAuthContext()
   const isAuthenticated = true
 
-  function render(props) {
-    //if (!auth.isAuthenticated) {
-    if (!isAuthenticated) {
-      return (
-        <Redirect
-          to={{
-            pathname: '/login',
-            state: {from: location}
-          }}
-        />
-      )
-    } else {
-      return <Component {...props} />
-    }
-  }
+  if (!isAuthenticated) return <Redirect to={{pathname: '/login', state: {from: location}}} />
 
-  return <Route {...routeProps} render={(props) => render(props)} />
+  const CompWithTransition = (props) => <FadeIn><Component {...routeProps} /></FadeIn>
+  const WrappedComp = applyWrappersToRoute(CompWithTransition, routeProps, wrappers, hooks)
+
+  return (
+    <Route {...routeProps}>
+      <WrappedComp props={routeProps} />
+    </Route>
+  )
 }
 
 PrivateRoute.propTypes = {
   /** The component to protected behind permissions. */
-  component: PropTypes.func,
+  component: PropTypes.object,
   /** Browser location object. */
   location: PropTypes.object,
   /** The remaining component properties. */
@@ -59,27 +63,28 @@ PrivateRoute.propTypes = {
  * Wrappers are HOC's that are automatically wrapped around a given container.
  * Wrappers are applied in order, with default wrappers being executed first.
  * Wrapper data can be passed data from a route.hooks object of the same name as the wrapper component.
- * Hooks are functions that execute when the component is wrapped and their properties are passed to the wrapper.
+ * Hooks are callback functions that execute when the component is wrapped and their properties are passed to the wrapper.
+ * @param {ReactElement} component The components to be wrapped.
  * @param {Array} wrappers The components to wrap around the route component.
- * @param {Object} route A routing object.
+ * @param {Array} hooks The component callback hooks to execute on the matched wrapper.
  * @return {Object} A HOC-wrapped route component.
  */
-function applyWrappersToRoute(wrappers = [], route){
+function applyWrappersToRoute(component, props, wrappers = [], hooks = []){
   const wrappedComponent = wrappers.reduce((aggregateComp, Wrapper) => {
     const wrapperName = Wrapper.prototype.constructor.name
     let hookProps = {}
 
     // assign/execute hooks and pass to the component wrapper props
-    if (route.hooks){
-      if (typeof route.hooks[wrapperName] === 'function'){
-        hookProps = route.hooks[wrapperName](route)
+    if (hooks) {
+      if (typeof hooks[wrapperName] === 'function'){
+        hookProps = hooks[wrapperName](props)
       } else {
-        hookProps = route.hooks[wrapperName]
+        hookProps = hooks[wrapperName]
       }
     }
 
     return Wrapper(aggregateComp, hookProps)
-  }, route.component)
+  }, component)
 
   return wrappedComponent
 }
@@ -100,21 +105,18 @@ function Routes(props){
           key={route.path}
           exact={route.exact}
           path={route.path}
-          component={applyWrappersToRoute(route.wrappers, route)}
-          hooks={route.hooks} />
+          component={route.component}
+          wrappers={route.wrappers}
+          hooks={route.hooks}
+        />
       )
     })
   }
 
   return (
-    <AnimatedSwitch
-      atEnter={{opacity: 0}}
-      atLeave={{opacity: 0}}
-      atActive={{opacity: 1}}
-      className={style.switchWrapper}
-    >
+    <Switch location={location}>
       {renderRoutes()}
-    </AnimatedSwitch>
+    </Switch>
   )
 }
 

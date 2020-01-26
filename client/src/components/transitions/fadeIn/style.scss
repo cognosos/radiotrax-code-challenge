@@ -1,0 +1,15 @@
+/**
+ * Fade-in animation.
+ */
+
+.fadeIn,
+.fadeIn-enter,
+.fadeIn-appear {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.fadeIn-enter-active,
+.fadeIn-appear-active {
+  opacity: 1;
+}

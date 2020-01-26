@@ -1,0 +1,59 @@
+/**
+ * Result Pagination
+ */
+
+@import "~stylesheets/_global.scss";
+
+.root {
+  composes: pagination from '~stylesheets/_global.scss';
+  display: flex;
+  flex-direction: row;
+
+  li {
+    margin: 0 0.5em;
+    border-radius: 5px;
+    transition: filter 0.33s;
+  }
+
+  li:not(.arrow) {
+    background-color: $theme-dark-bg-color;
+    filter: brightness(1.1);
+  }
+
+  li:hover {
+    filter: brightness(1.5);
+  }
+}
+
+.arrow {
+  flex-grow: 1;
+}
+
+.arrow:first-child {
+  text-align: left;
+}
+
+.arrow:last-child {
+  text-align: right;
+}
+
+.waves {
+  composes: waves-effect from '~stylesheets/_global.scss';
+}
+
+.active {
+  composes: active from '~stylesheets/_global.scss';
+}
+
+.selected {
+  composes: selected from '~stylesheets/_global.scss';
+}
+
+/**
+ * Dark Theme
+ */
+.root.theme-dark {
+  .active {
+    background-color: $theme-dark-black-1;
+  }
+}

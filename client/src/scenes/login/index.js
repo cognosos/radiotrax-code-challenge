@@ -3,8 +3,7 @@
  */
 
 // lib
-import {CSSTransition} from "react-transition-group";
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import {useToasts} from 'react-toast-notifications'
 import _ from 'lodash'
@@ -14,6 +13,7 @@ import {useThemeContext} from '../../context/theme'
 // services
 import AuthService from '../../services/auth'
 // components
+import Background from '../../components/background'
 import Scene from '../../components/scene'
 import Logo from '../../components/logo'
 import Card from '../../components/card'
@@ -21,9 +21,6 @@ import Input from '../../components/input'
 import Button from '../../components/button'
 import Loading from '../../components/loading'
 import Layout from '../../components/layout'
-import Particles from 'react-particles-js'
-// constants
-import PARTICLES_CONFIG from './bg.config.json'
 // util
 import {authEncode} from '../../util/auth'
 // style
@@ -76,63 +73,53 @@ function Login(props) {
     style[theme]
   )
 
-  const [enter, setEnter] = useState()
-  useEffect(() => {
-    setTimeout(() => setEnter(true), 300)
-  })
-
   return (
     <Scene full={true} centered={true} className={classNames}>
-      <div className={style.bg}>
-        <Particles params={PARTICLES_CONFIG} width="100%" height="100vh"  />
-      </div>
+      <Background />
+      <Layout className={style.auth}>
+        <Logo className={style.logo} type={['medium', 'grayscale']} />
 
-      <CSSTransition in={true} appear={true} timeout={500} classNames={style.fadeIn}>
-        <Layout className={style.auth}>
-          <Logo className={style.logo} type={['medium', 'grayscale']} />
+        <Card>
+          <h1 className={style.header}>
+            Welcome!
+          </h1>
 
-          <Card>
-            <h1 className={style.header}>
-              Welcome!
-            </h1>
+          <h2 className={style.instructions}>
+            Please log in to your Account.
+          </h2>
 
-            <h2 className={style.instructions}>
-              Please log in to your Account.
-            </h2>
+          <Input
+            name="username"
+            type="text"
+            label="Username"
+            placeholder="myusername"
+            required
+            pattern="[a-zA-Z0-9]+"
+            onChange={handleUsernameChange}
+          />
 
-            <Input
-              name="username"
-              type="text"
-              label="Username"
-              placeholder="myusername"
-              required
-              pattern="[a-zA-Z0-9]+"
-              onChange={handleUsernameChange}
-            />
+          <Input
+            name="password"
+            type="password"
+            label="Password"
+            placeholder="........"
+            required
+            onChange={handlePasswordChange}
+          />
 
-            <Input
-              name="password"
-              type="password"
-              label="Password"
-              placeholder="........"
-              required
-              onChange={handlePasswordChange}
-            />
+          <Button
+            className={style.button}
+            onClick={handleSubmit}
+            disabled={!canSubmit}
+            label={processing ? null : 'Login'}
+            icon={processing ? <Loading type='tiny' /> : null}
+          />
+        </Card>
 
-            <Button
-              className={style.button}
-              onClick={handleSubmit}
-              disabled={!canSubmit}
-              label={processing ? null : 'Login'}
-              icon={processing ? <Loading type='tiny' /> : null}
-            />
-          </Card>
-
-          <p className={style.moreDetails}>
-            Remember that usernames can not contain any special characters.
-          </p>
-        </Layout>
-      </CSSTransition>
+        <p className={style.moreDetails}>
+          Remember that usernames can not contain any special characters.
+        </p>
+      </Layout>
     </Scene>
   )
 }

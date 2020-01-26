@@ -5,10 +5,12 @@
 // lib
 import React from 'react'
 import PropTypes from 'prop-types'
+import {NavLink} from 'react-router-dom'
 // context
 import {useThemeContext} from '../../context/theme'
 // components
 import TopNavItem from './item'
+import Badge from '../badge'
 import Icon from '../icon'
 // style
 import cls from 'classnames'
@@ -37,7 +39,7 @@ function TopNav(props) {
   return (
     <nav className={classNames}>
       <div className={style.navWrapper}>
-        {title && <h1 className={style.title}>{title}</h1>}
+        {title && <Badge>{title}</Badge>}
 
         <ul className={cls(style.items, style.right)}>
           {items.map((item, key) => {
