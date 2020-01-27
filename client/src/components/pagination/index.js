@@ -3,7 +3,7 @@
  */
 
 // lib
-import React from 'react'
+import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 // context
 import {useThemeContext} from '../../context/theme'
@@ -19,7 +19,8 @@ import style from './style.scss'
  * @return {ReactElement}
  */
 function Pagination(props) {
-  const {className, pages, selected} = props
+  const {className, pages, onChange} = props
+  const [selected, _setSelected] = useState(props.selected)
   const {theme} = useThemeContext()
 
   const classNames = cls(
@@ -30,14 +31,22 @@ function Pagination(props) {
 
   if (pages === 0) return
 
+  /** Keep selected in bounds */
+  function setSelected(page) {
+    page = Math.max(page, 0)
+    page = Math.min(page, pages - 1)
+    if (page !== selected) {
+      _setSelected(page)
+      if (onChange) onChange(page)
+    }
+  }
+
   const range = [...Array(pages).keys()]
 
   return (
     <ul className={classNames}>
-      <li className={cls(style.arrow, style.waves)}>
-        <a href="#!">
-          <Icon type="chevron_left" />
-        </a>
+      <li className={cls(style.arrow, style.waves)} onClick={() => setSelected(selected - 1)}>
+        <a><Icon type="chevron_left" /></a>
       </li>
 
       {range.map((page) => {
@@ -46,23 +55,20 @@ function Pagination(props) {
         )
 
         return (
-          <li key={page} className={itemClasses}>
-            <a href="#!">{page + 1}</a>
+          <li key={page} className={itemClasses} onClick={() => setSelected(page)}>
+            <a>{page + 1}</a>
           </li>
         )
       })}
 
-      <li className={cls(style.arrow, style.waves)}>
-        <a href="#!">
-          <Icon type="chevron_right" />
-        </a>
+      <li className={cls(style.arrow, style.waves)} onClick={() => setSelected(selected + 1)}>
+        <a><Icon type="chevron_right" /></a>
       </li>
     </ul>
   )
 }
 
 Pagination.defaultProps = {
-  pages: 5,
   selected: 0
 }
 

@@ -12,6 +12,8 @@
   li {
     margin: 0 0.5em;
     border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
     transition: filter 0.33s;
   }
 
@@ -53,6 +55,10 @@
  * Dark Theme
  */
 .root.theme-dark {
+  li {
+    color: $theme-dark-text;
+  }
+
   .active {
     background-color: $theme-dark-black-1;
   }

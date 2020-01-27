@@ -23,6 +23,8 @@ import Loading from '../../components/loading'
 import Layout from '../../components/layout'
 // util
 import {authEncode} from '../../util/auth'
+// constants
+import {NOTIFICATION_TIMEOUT} from '../../constants/app'
 // style
 import style from './style.scss'
 
@@ -44,11 +46,13 @@ function Login(props) {
 
   function handleSubmit(e) {
     setProcessing(true)
+    setAuth({...auth, username, password})
 
     AuthService.verifyCreds().then((passed) => {
       if (passed) {
         setAuth({...auth, isAuthenticated: true})
-        setTimeout(() => history.push('/devices'), 666)
+        addToast('Success! Welcome to the Admin :)', {appearance: 'success'})
+        setTimeout(() => history.push('/devices'), NOTIFICATION_TIMEOUT)
       } else {
         setProcessing(false)
         addToast('Invalid credentials, please try again', {appearance: 'error'})
@@ -66,6 +70,10 @@ function Login(props) {
     setAuth({...auth, password: value})
     setPassword(value)
     setValidation({...valid, password: isValid})
+  }
+
+  function handleKeyDown(e) {
+    if (e.key === 'Enter' && auth.username && auth.password) handleSubmit(e)
   }
 
   const classNames = (
@@ -96,6 +104,7 @@ function Login(props) {
             required
             pattern="[a-zA-Z0-9]+"
             onChange={handleUsernameChange}
+            onKeyDown={handleKeyDown}
           />
 
           <Input
@@ -105,6 +114,7 @@ function Login(props) {
             placeholder="........"
             required
             onChange={handlePasswordChange}
+            onKeyDown={handleKeyDown}
           />
 
           <Button

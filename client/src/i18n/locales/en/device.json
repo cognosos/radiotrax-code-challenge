@@ -9,7 +9,7 @@
   "application_code": "Application Code",
   "asset_identifier": "Asset Identifier",
   "battery_level": "Battery Level",
-  "internal_temperature": "Internal Temperature",
+  "internal_temperature": "Temperature",
   "status": "Status",
 
   "__COMMENT__": "Device common text.",

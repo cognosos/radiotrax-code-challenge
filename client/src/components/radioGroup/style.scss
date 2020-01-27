@@ -1,6 +1,8 @@
 @import '~stylesheets/_global.scss';
 
-.root {
+.root {}
+
+.container {
   display: inline-flex;
   flex-direction: column;
 }
@@ -99,5 +101,37 @@
 
   &:before {
     opacity: 0;
+  }
+}
+
+.root.inline {
+  display: flex;
+  align-items: center;
+
+  .mainLabel {
+    margin-right: 1em;
+  }
+
+  .button {
+    width: auto;
+  }
+
+  .button + .button {
+    margin-left: 0.33em;
+  }
+
+  .container {
+    flex-direction: row;
+    width: auto !important;
+    margin: 0;
+
+    label {
+      flex-grow: 0;
+      margin: 0 1em 0 0;
+    }
+
+    label > span {
+      margin-left: 0.5rem;
+    }
   }
 }

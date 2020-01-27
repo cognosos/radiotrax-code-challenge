@@ -1,0 +1,14 @@
+{
+  "devices": {
+    "fetch": {
+      "empty": "No matching device was found."
+    },
+    "list": {
+      "empty": "No matching devices were found.",
+      "pagination": {
+        "misuse": "Pagination Params Error: Pagination requires valid `page` AND `limit` query params.",
+        "range_error": "Pagination Range Error: Must use non-negative numbers."
+      }
+    }
+  }
+}

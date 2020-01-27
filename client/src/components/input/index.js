@@ -3,7 +3,7 @@
  */
 
 // lib
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 // context
@@ -35,6 +35,7 @@ function Input(props) {
     maxLength,
     // events
     onChange,
+    onKeyDown,
     // form field status
     fieldState
   } = props
@@ -48,17 +49,18 @@ function Input(props) {
   const uniqueName = name || _.uniqueId(`input_${type}_`)
 
   /**
-   * Handle the input changing.
+   * Handle the input changing via onChange or onKeyDown.
    * @param {Event} e The change event.
    */
-  function handleChange(e){
+  function handleChange(e) {
     // check internal input element validity for error procesing,
     // based on [required] and [pattern] attributes.
     const target = e.nativeEvent.target
     const {validity: {valueMissing, patternMismatch}} = target
     const isInvalid = valueMissing || patternMismatch
 
-    if (onChange) onChange(e, target.value, !isInvalid)
+    if (e.type === 'change' && onChange) onChange(e, target.value, !isInvalid)
+    if (e.type === 'keydown' && onKeyDown) onKeyDown(e, target.value, !isInvalid)
 
     setValidation({
       touched: true,
@@ -89,6 +91,7 @@ function Input(props) {
         disabled={disabled}
         pattern={pattern}
         onChange={handleChange}
+        onKeyDown={handleChange}
         minLength={minLength}
         maxLength={maxLength}
         tooltip={label}

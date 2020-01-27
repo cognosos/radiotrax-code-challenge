@@ -1,6 +1,6 @@
 // lib
 import React from 'react'
-import {storiesOf, addParameters} from '@storybook/react'
+import {storiesOf} from '@storybook/react'
 // components
 import Loading from '.'
 

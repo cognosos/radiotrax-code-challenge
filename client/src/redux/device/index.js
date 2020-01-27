@@ -14,6 +14,7 @@ import {cleanId} from '../../util'
 const SET_LIST = 'device/SET_LIST'
 const SET_CURRENT = 'device/SET_CURRENT'
 const RESET_CURRENT = 'device/RESET_CURRENT'
+const SET_PAGINATION = 'device/SET_PAGINATION'
 
 /**
  * States.
@@ -21,7 +22,8 @@ const RESET_CURRENT = 'device/RESET_CURRENT'
 
 const initialState = {
   list: null,
-  current: null
+  current: null,
+  pagination: null
 }
 
 /**
@@ -32,7 +34,7 @@ const initialState = {
  * Retrieve a list of devices.
  * @return {Function} Action creator.
  */
-export function getDevices() {
+export function getDevices({limit, page} = {}) {
   /**
    * Dispatches action(s).
    * @param {Function} dispatch The redux dispatcher.
@@ -40,7 +42,8 @@ export function getDevices() {
    */
   return async(dispatch) => {
     try {
-      const devices = await DeviceService.list()
+      const {devices, count, total, pages} = await DeviceService.list({page, limit})
+      dispatch(setPagination({page, limit, count, total, pages}))
       dispatch(setList(devices))
     } catch (e){
       console.warn(`Something went wrong. Unable to fetch devices. ${e.message}`, e)
@@ -109,6 +112,18 @@ export function resetCurrent(){
 }
 
 /**
+ * Assign the pagination data.
+ * @param {Object} pagination The pagination object.
+ * @return {Object} Redux action.
+ */
+export function setPagination(pagination) {
+  return {
+    type: SET_PAGINATION,
+    pagination
+  }
+}
+
+/**
  * Reducers.
  */
 
@@ -134,6 +149,16 @@ export default function deviceReducer(state = initialState, action){
       return {
         ...state,
         current: initialState.current
+      }
+    case SET_CURRENT:
+      return {
+        ...state,
+        current: action.device
+      }
+    case SET_PAGINATION:
+      return {
+        ...state,
+        pagination: action.pagination
       }
     default:
       return state

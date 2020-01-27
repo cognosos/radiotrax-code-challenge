@@ -59,11 +59,8 @@
  * Dark Theme
  */
 .root.theme-dark {
+  color: $theme-dark-text;
   background-color: $theme-dark-gray;
-
-  .title {
-    color: $theme-dark-text;
-  }
 
   .tag {
     filter: saturate(0.6);

@@ -96,6 +96,25 @@
     color: $theme-dark-text;
   }
 
+  &.error {
+    .input,
+    .input:focus {
+      border-color: #F04747 !important;
+    }
+
+    label {
+      color: #F04747 !important;
+    }
+
+    label:before {
+      content: unset;
+    }
+
+    label:after {
+      content: 'This field is required';
+    }
+  }
+
   // a very annoying hack to prevent chrome and safari from
   // overriding -webkit-autofill properties
   @-webkit-keyframes autofill {

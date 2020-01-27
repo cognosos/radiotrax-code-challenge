@@ -10,7 +10,7 @@ import {useTranslation} from 'react-i18next'
 import moment from 'moment'
 import {debounce} from 'lodash'
 // redux
-import {getDevices, resetCurrent as resetCurrentDevice} from '../../redux/device'
+import {getDevices, resetCurrent as resetCurrentDevice, setPagination} from '../../redux/device'
 // contexts
 import {useThemeContext} from '../../context/theme'
 // components
@@ -21,8 +21,10 @@ import Pagination from '../../components/pagination'
 import Card from '../../components/card'
 import Icon from '../../components/icon'
 import Input from '../../components/input'
+import Select from '../../components/select'
 import RadioGroup from '../../components/radioGroup'
 import Meter from '../../components/meter'
+import TopNav from '../../components/topNav'
 import {Layout, Row, Column} from '../../components/layout'
 // style
 import cls from 'classnames'
@@ -39,20 +41,25 @@ const ORDER_CRITERIA = {
   DESC: 'DESC'
 }
 
+const DEFAULT_PAGE = 0
+const DEFAULT_LIMIT = 3
+
 /**
  * A scene that lists available devices.
  * @param {Object} props Component properties.
  * @return {ReactElement}
  */
 function DevicesScene(props) {
-  const {actions, devices} = props
+  const {actions, list, pagination = {}} = props
   const {theme} = useThemeContext()
-  const [sortBy, setSortBy] = useState(SORT_CRITERIA.DATE)
-  const [sortOrder, setSortOrder] = useState(ORDER_CRITERIA.ASC)
-  const [searchTerm, setSearchTerm] = useState()
   const dispatch = useDispatch()
   const history = useHistory()
   const {t, i18n} = useTranslation()
+  // results state
+  const [sortBy, setSortBy] = useState(SORT_CRITERIA.DATE)
+  const [sortOrder, setSortOrder] = useState(ORDER_CRITERIA.ASC)
+  const [searchTerm, setSearchTerm] = useState()
+  const {page, limit, count, total, pages} = pagination || {}
 
   // i18n keeps a priority-ordered list of languages, the first is the active lang
   const [currentLang] = i18n.languages
@@ -60,21 +67,34 @@ function DevicesScene(props) {
   dispatch(actions.resetCurrentDevice())
 
   // fill redux state with devices
-  if (!devices) {
-    dispatch(actions.getDevices())
+  if (!list) {
+    const params = (pagination)
+      ? {page: pagination.page, limit: pagination.limit}
+      : {page: DEFAULT_PAGE, limit: DEFAULT_LIMIT}
+
+    dispatch(actions.getDevices(params))
   }
 
   // display loader while waitingn
-  if (!devices) return (
+  if (!list) return (
     <Layout full={true} centered={true}>
       <Loading type="dark" />
     </Layout>
   )
 
+  // if we get an empty array of devices, display a message
+  if (Array.isArray(list) && list.length === 0) return (
+    <Layout full={true} centered={true}>
+      <Card>
+        No devices available at this time.
+      </Card>
+    </Layout>
+  )
+
   // filter
-  let filteredDevices = devices
+  let filteredDevices = list
   if (searchTerm && searchTerm.trim() !== '') {
-    filteredDevices = devices.reduce((matches, device) => {
+    filteredDevices = list.reduce((matches, device) => {
       const firmwareMatches = device.firmware_version.includes(searchTerm)
       const deviceIdMatches = device.device_id.toString().includes(searchTerm)
 
@@ -83,15 +103,6 @@ function DevicesScene(props) {
       return matches
     }, [])
   }
-
-  // if we get an empty array of devices, display a message
-  if (Array.isArray(devices) && devices.length === 0) return (
-    <Layout full={true} centered={true}>
-      <Card>
-        No devices available at this time.
-      </Card>
-    </Layout>
-  )
 
   function handleFilter(event) {
     setSearchTerm(event.nativeEvent.target.value)
@@ -103,6 +114,10 @@ function DevicesScene(props) {
 
   function handleSortOrderChange(event) {
     setSortOrder(event.nativeEvent.target.value)
+  }
+
+  function handlePaginationChange(page) {
+    dispatch(actions.getDevices({page, limit}))
   }
 
   function sortFunc(a, b) {
@@ -120,58 +135,56 @@ function DevicesScene(props) {
   )
 
   return (
-    <div className={'fuck'}>
-
-      <Card>
+    <div className={classNames}>
+      <Card className={style.search}>
         <Input
+          label="Search"
           type="text"
-          placeholder="Filter: by `DEVICE ID` or by `FIRMWARE VERSION`"
+          placeholder="by `DEVICE ID` or by `FIRMWARE VERSION`"
           className={style.filter}
           onChange={handleFilter}
         />
       </Card>
 
-      <Card>
-        <div className={style.sortOptions}>
-          <div className={style.sortBy}>
-            <label className={style.sortLabel}>
-              Sort By:
-            </label>
-            <RadioGroup onChange={handleSortByChange} items={[{
-              label: 'Date',
-              value: SORT_CRITERIA.DATE
-            }, {
-              label: 'Battery',
-              value: SORT_CRITERIA.BATTERY
-            }, {
-              label: 'Temperature',
-              value: SORT_CRITERIA.TEMPERATURE
-            }]} />
-          </div>
-          <div className={style.sortOrder}>
-            <label className={style.sortLabel}>
-              Sort Order:
-            </label>
-            <RadioGroup onChange={handleSortOrderChange} items={[{
-              label: 'ASC',
-              value: ORDER_CRITERIA.ASC
-            }, {
-              label: 'DESC',
-              value: ORDER_CRITERIA.DESC
-            }]} />
-          </div>
+      <div className={style.sortSettings}>
+        {/*
+        <div className={style.sortSetting}>
+          <Select inline={true} label="Results per Page:" options={[
+            {label: '5', value: 5},
+            {label: '10', value: 10},
+            {label: '50', value: 50}
+          ]} />
         </div>
-      </Card>
-
-      <Pagination className={style.pagination} pages={5} />
-
-      {filteredDevices.sort(sortFunc).map((data, i) => (
-        <div key={i} onClick={() => history.push(`/devices/${data.id}`)}>
-          <Device {...data} />
+        */}
+        <div className={style.sortSetting}>
+          <Select inline={true} label="Sort by:" options={[
+            {label: 'Date', value: SORT_CRITERIA.DATE},
+            {label: 'Battery', value: SORT_CRITERIA.BATTERY},
+            {label: 'Temperature', value: SORT_CRITERIA.TEMPERATURE}
+          ]} />
         </div>
-      ))}
+        <div className={style.sortSetting}>
+          <RadioGroup className={style.sortOrder} inline={true} label="Sort order:" onChange={handleSortOrderChange} items={[{
+            label: 'ASC',
+            value: ORDER_CRITERIA.ASC
+          }, {
+            label: 'DESC',
+            value: ORDER_CRITERIA.DESC
+          }]} />
+        </div>
+      </div>
 
-      <Pagination pages={5} />
+      <Pagination pages={pages} selected={page} onChange={handlePaginationChange} className={style.paginationTop} />
+
+      <div className={style.devices}>
+        {filteredDevices.sort(sortFunc).map((data, i) => (
+          <div key={i} onClick={() => history.push(`/devices/${data.id}`)} className={style.device}>
+            <Device {...data} />
+          </div>
+        ))}
+      </div>
+
+      <Pagination pages={pages} selected={page} onChange={handlePaginationChange} className={style.paginationBottom} />
     </div>
   )
 }
@@ -182,8 +195,8 @@ function DevicesScene(props) {
  * @return {Object} mapped state.
  */
 function mapStateToProps(state){
-  const {device: {list}} = state
-  return {devices: list}
+  const {device: {list, pagination}} = state
+  return {list, pagination}
 }
 
 /**
@@ -193,7 +206,7 @@ function mapStateToProps(state){
  */
 function mapDispatchToProps(dispatch){
   return {
-    actions: {getDevices, resetCurrentDevice}
+    actions: {getDevices, resetCurrentDevice, setPagination}
   }
 }
 

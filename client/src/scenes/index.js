@@ -12,6 +12,8 @@ import {ThemeContext} from '../context/theme'
 // hooks
 import useAuth from '../hooks/useAuth'
 import useTheme from '../hooks/useTheme'
+// constants
+import {NOTIFICATION_TIMEOUT} from '../constants/app'
 // style
 import cls from 'classnames'
 import style from './style.scss'
@@ -47,7 +49,7 @@ function AppScene(props) {
     <div className={classNames}>
       <AuthContext.Provider value={{auth, setAuth}}>
         <ThemeContext.Provider value={{theme, setTheme}}>
-          <ToastProvider placement="top-center" autoDismiss autoDismissTimeout={2000}>
+          <ToastProvider placement="top-right" autoDismiss autoDismissTimeout={NOTIFICATION_TIMEOUT}>
             {children}
           </ToastProvider>
         </ThemeContext.Provider>

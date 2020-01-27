@@ -17,14 +17,15 @@ import style from './style.scss'
  * @return {ReactElement}
  */
 function RadioGroup(props) {
-  const {className, items, onChange} = props
+  const {className, inline, label, items, onChange} = props
   const [selected, setSelected] = useState(0)
   const {theme} = useThemeContext()
 
   const classNames = cls([
     style.root,
     style[theme],
-    className
+    className,
+    {[style.inline]: inline}
   ])
 
   /**
@@ -41,28 +42,31 @@ function RadioGroup(props) {
 
   return (
     <div className={classNames}>
-    {items.map((item, i) => {
-      const {label, value} = item
-      const isSelected = selected === i
+      {label && <label className={style.mainLabel}>{label}</label>}
+      <div className={style.container}>
+        {items.map((item, i) => {
+          const {label: lbl, value} = item
+          const isSelected = selected === i
 
-      return (
-        <div key={i} className={style.button}>
-          <label className={style.label}>
-            <input
-              className={style.input}
-              type="checkbox"
-              onClick={(e) => handleChange(e, i)}
-              checked={isSelected}
-              value={value}
-              onChange={() => {}}
-            />
+          return (
+            <div key={i} className={style.button}>
+              <label className={style.label}>
+                <input
+                  className={style.input}
+                  type="checkbox"
+                  onClick={(e) => handleChange(e, i)}
+                  checked={isSelected}
+                  value={value}
+                  onChange={() => {}}
+                />
 
-            <div className={cls(style.input, style.radio, className)} />
-            <span>{label}</span>
-          </label>
-        </div>
-      )
-    })}
+                <div className={cls(style.input, style.radio, className)} />
+                <span>{lbl}</span>
+              </label>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

@@ -11,18 +11,21 @@ import API from '../api'
  */
 class DeviceService {
   /**
-   * List all devices in a store.
    * HTTP GET.
+   * List all devices in a store.
+   * @param {Object} params List parameters:
+   *  - @param {Number} page The current pagination page of the result set.
+   *  - @param {Number} limit The number of results to limit the response to.
    * @return {Array} a list of organizations.
    */
-  static async list(page, limit){
-    const response = await API.get('/devices')
+  static async list({page, limit} = {}) {
+    const response = await API.get('/devices', {page, limit})
     return await response.json()
   }
 
   /**
-   * Get a specific device.
    * HTTP GET.
+   * Get a specific device.
    * @param {String} id The device to fetch.
    * @return {Object} A device.
    */
